@@ -1,0 +1,3 @@
+INSERT INTO Pessoas (name, last_Name, email, cpf, rg, enderecos, contatos) VALUES ('Erick Bento', 'Dias Ferreira', 'erickbento@yahoo.com.br', '11111111111', '222222222', 'São Caetano do Sul', '11933333333');
+
+INSERT INTO Pessoas (name, last_Name, email, cpf, rg, enderecos, contatos) VALUES ('Isaque Bento', 'Martins Ferreira', 'isaquebento@yahoo.com.br', '99999999999', '888888888', 'Santo André', '11944444444');
