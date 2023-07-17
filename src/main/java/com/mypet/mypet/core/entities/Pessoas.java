@@ -32,6 +32,6 @@ public class Pessoas implements Serializable {
       //  @JoinColumn(name = "enderecos_id")
         private String enderecos;
         private String contatos;
-       // private LocalDate dataDeNasc;
+        private LocalDate dataDeNasc;
 
 }
