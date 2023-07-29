@@ -1,7 +1,7 @@
 package com.mypet.mypet.userCase;
 
-import com.mypet.mypet.core.entities.Pessoas;
-import com.mypet.mypet.dto.Cliente;
+import com.mypet.mypet.core.entities.tb_principal.Pessoas;
+import com.mypet.mypet.dto.ClienteDTO;
 import com.mypet.mypet.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import java.util.List;
 public class ClienteUserCase {
     @Autowired
     private ClienteRepository clienteRepository;
-    public List<Cliente> findAll(){
+    public List<ClienteDTO> findAll(){
     List<Pessoas> result = clienteRepository.findAll();
-    List<Cliente> dto = result.stream().map(x -> new Cliente(x)).toList();
+    List<ClienteDTO> dto = result.stream().map(x -> new ClienteDTO(x)).toList();
     return dto;
 }
 

@@ -1,4 +1,4 @@
-package com.mypet.mypet.core.entities;
+package com.mypet.mypet.core.entities.tb_principal;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
@@ -46,6 +46,5 @@ public class Pessoas implements Serializable {
         private Timestamp dataDeCadastro;
 
 
-        public Pessoas(Pessoas x) {
-        }
+
 }

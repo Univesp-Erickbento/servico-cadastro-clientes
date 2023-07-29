@@ -1,8 +1,6 @@
 package com.mypet.mypet.controllers;
 
-import com.mypet.mypet.core.entities.Pessoas;
-import com.mypet.mypet.core.model.Clientes;
-import com.mypet.mypet.dto.Cliente;
+import com.mypet.mypet.dto.ClienteDTO;
 import com.mypet.mypet.userCase.ClienteUserCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +17,8 @@ public class ClienteController {
     private ClienteUserCase clienteUserCase;
 
     @GetMapping
-    public List<Cliente> findAll(){
-        List<Cliente> result = clienteUserCase.findAll();
+    public List<ClienteDTO> findAll(){
+        List<ClienteDTO> result = clienteUserCase.findAll();
       // List<Cliente> dto = result.stream().map(cliente -> new Cliente(cliente)).toList();
         return result;
     }

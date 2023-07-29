@@ -1,7 +1,6 @@
 package com.mypet.mypet.dto;
 
-import com.mypet.mypet.core.entities.Pessoas;
-import com.mypet.mypet.core.model.Clientes;
+import com.mypet.mypet.core.entities.tb_principal.Pessoas;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
+public class ClienteDTO {
 
 private long id;
 private String name;
@@ -24,7 +23,7 @@ private LocalDate dataDeNasc;
 
 
 
-    public Cliente(Pessoas cliente) {
+    public ClienteDTO(Pessoas cliente) {
 
         id = cliente.getId();
         name = cliente.getName();

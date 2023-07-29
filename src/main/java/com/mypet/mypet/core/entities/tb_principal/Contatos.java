@@ -1,4 +1,4 @@
-package com.mypet.mypet.core.entities;
+package com.mypet.mypet.core.entities.tb_principal;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,10 +26,8 @@ public class Contatos implements Serializable {
         private String contatoNumero;
 
 //        @ManyToOne
-//        @JoinColumn(name = "cpf")
-//        private Pessoas contatoCpf = pessoaCPf;
-
-        private String contatoCpf;
+//        @JoinColumn(name = "PessoaContatoId")
+//        private String contatoPessoa;
 
        // @ManyToOne
       //  @JoinColumn(name = "enderecos_id")

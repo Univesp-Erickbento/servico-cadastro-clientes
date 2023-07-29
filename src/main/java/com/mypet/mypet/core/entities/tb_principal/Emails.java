@@ -1,4 +1,4 @@
-package com.mypet.mypet.core.entities;
+package com.mypet.mypet.core.entities.tb_principal;
 
 import jakarta.persistence.*;
 import lombok.*;
