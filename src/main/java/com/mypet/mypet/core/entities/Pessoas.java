@@ -5,9 +5,14 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-@Builder
+
+@ToString
+@Data
+@Setter
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"id"})
@@ -15,7 +20,7 @@ import java.time.LocalDate;
 @Table(name = "Pessoas")
 public class Pessoas implements Serializable {
 
-        private static final long serialVersionUID =1l;
+        private static final long serialVersionUID = 1l;
 
 
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +32,20 @@ public class Pessoas implements Serializable {
         private String email;
         private String cpf;
         private String rg;
-
-       // @ManyToOne
-      //  @JoinColumn(name = "enderecos_id")
+        private String genero;
         private String enderecos;
         private String contatos;
-        private LocalDate dataDeNasc;
 
+        //
+//       @OneToMany(mappedBy = "enderecoCpf")
+//        private List<Enderecos> enderecos1 = new ArrayList<>();
+//
+//        @OneToMany(mappedBy = "contatoCpf")
+//        private List<Contatos> contatos1 = new ArrayList<>();
+        private LocalDate dataDeNasc;
+        private Timestamp dataDeCadastro;
+
+
+        public Pessoas(Pessoas x) {
+        }
 }
