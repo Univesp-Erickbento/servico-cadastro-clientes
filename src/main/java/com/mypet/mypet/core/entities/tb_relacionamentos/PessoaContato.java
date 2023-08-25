@@ -1,11 +1,15 @@
 package com.mypet.mypet.core.entities.tb_relacionamentos;
 
+import com.mypet.mypet.core.entities.tb_pk.PessoaContatoPK;
+import com.mypet.mypet.core.entities.tb_principal.Contatos;
+import com.mypet.mypet.core.entities.tb_principal.Pessoas;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 @ToString
 @Data
@@ -16,24 +20,18 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Entity
-@Table(name = "Pessoas")
+@Table(name = "PessoaContato")
+@Embeddable
 public class PessoaContato implements Serializable {
 
         private static final long serialVersionUID = 1l;
 
 
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Id
-        private long id;
 
-        private String name;
-        private String lastName;
-        private String email;
-        private String cpf;
-        private String rg;
-        private String genero;
-        private String enderecos;
-        private String contatos;
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+        @EmbeddedId
+      private  PessoaContatoPK id = new PessoaContatoPK();
 
         //
 //       @OneToMany(mappedBy = "enderecoCpf")
@@ -41,8 +39,6 @@ public class PessoaContato implements Serializable {
 //
 //        @OneToMany(mappedBy = "contatoCpf")
 //        private List<Contatos> contatos1 = new ArrayList<>();
-        private LocalDate dataDeNasc;
-        private Timestamp dataDeCadastro;
 
 
 

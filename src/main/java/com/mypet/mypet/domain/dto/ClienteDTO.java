@@ -1,4 +1,4 @@
-package com.mypet.mypet.dto;
+package com.mypet.mypet.domain.dto;
 
 import com.mypet.mypet.core.entities.tb_principal.Pessoas;
 import lombok.*;

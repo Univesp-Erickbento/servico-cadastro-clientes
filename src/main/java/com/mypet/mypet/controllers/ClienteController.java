@@ -1,6 +1,6 @@
 package com.mypet.mypet.controllers;
 
-import com.mypet.mypet.dto.ClienteDTO;
+import com.mypet.mypet.domain.dto.ClienteDTO;
 import com.mypet.mypet.userCase.ClienteUserCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
