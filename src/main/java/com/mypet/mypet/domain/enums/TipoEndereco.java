@@ -1,12 +1,12 @@
 package com.mypet.mypet.domain.enums;
 
-public enum Status {
-    ATIVO(0, "ATIVO"), BLOQUEADO(1, "BLOQUEADO"), INATIVO(2, "INATIVO");
+public enum TipoEndereco {
+    PRINCIPAL(0, "ENDEREÇO PRINCIPAL"), ENDERECO2(1, "ENDEREÇO SECUNDARIO"), ENDERECO3(2, "TERCEIRO ENDEREÇO");
 
     private Integer codigo;
     private String descricao;
 
-    private Status(Integer codigo, String descricao) {
+    private TipoEndereco(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -19,17 +19,17 @@ public enum Status {
         return descricao;
     }
 
-    public static Status toEnum(Integer cod) {
+    public static TipoEndereco toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
 
-        for(Status x : Status.values()) {
+        for(TipoEndereco x : TipoEndereco.values()) {
             if(cod.equals(x.getCodigo())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Status inválido");
+        throw new IllegalArgumentException("Tipo de endereço inválido");
     }
 }

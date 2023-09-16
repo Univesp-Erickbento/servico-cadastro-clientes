@@ -1,12 +1,13 @@
 package com.mypet.mypet.domain.enums;
 
-public enum Status {
-    ATIVO(0, "ATIVO"), BLOQUEADO(1, "BLOQUEADO"), INATIVO(2, "INATIVO");
+public enum TipoTutor {
+    INICANTE(0, "MENOS_1MÊS"), JUNIOR(1, "DE_2_A_6_MÊSES"), SENIOR(2, "MAIS-DE-6_MESES"),
+    VIPE(3, "MAIS_DE_1_ANO");
 
     private Integer codigo;
     private String descricao;
 
-    private Status(Integer codigo, String descricao) {
+    private TipoTutor(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -19,17 +20,17 @@ public enum Status {
         return descricao;
     }
 
-    public static Status toEnum(Integer cod) {
+    public static TipoTutor toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
 
-        for(Status x : Status.values()) {
+        for(TipoTutor x : TipoTutor.values()) {
             if(cod.equals(x.getCodigo())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Status inválido");
+        throw new IllegalArgumentException("Genero inválido");
     }
 }

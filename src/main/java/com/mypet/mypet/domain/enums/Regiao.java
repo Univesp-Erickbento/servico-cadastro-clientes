@@ -1,12 +1,14 @@
 package com.mypet.mypet.domain.enums;
 
-public enum Status {
-    ATIVO(0, "ATIVO"), BLOQUEADO(1, "BLOQUEADO"), INATIVO(2, "INATIVO");
+public enum Regiao {
+   LESTE(0, "ZONA LESTE"), OESTE(1, "ZONA OESTE"), SUL(2, "ZONA SUL"),
+    NORTE(3, "ZONA NORTE"), ABC(4, "SANTO ANDRÉ, SÃO CAETANO DO SUL, SÃO BERNARDO DO CAMPO, MAÚA, DIADEMA")
+    , CAPITAL(5, "CIDADE DE SÃO PAULO");
 
     private Integer codigo;
     private String descricao;
 
-    private Status(Integer codigo, String descricao) {
+    private Regiao(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -19,17 +21,17 @@ public enum Status {
         return descricao;
     }
 
-    public static Status toEnum(Integer cod) {
+    public static Regiao toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
 
-        for(Status x : Status.values()) {
+        for(Regiao x : Regiao.values()) {
             if(cod.equals(x.getCodigo())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Status inválido");
+        throw new IllegalArgumentException("Região inválida");
     }
 }

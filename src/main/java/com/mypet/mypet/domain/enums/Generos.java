@@ -1,12 +1,13 @@
 package com.mypet.mypet.domain.enums;
 
-public enum Perfil {
-    ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
+public enum Generos {
+    HOMEM_CIS(0, "SEXO_MASCULINO"), MULHER_CIS(1, "SEXO_FEMININO"), HOMEN_TRANS(2, "IDENTIFICA_HOMEM"),
+    MULHER_TRANS(3, "IDENTIFICA_MULHER");
 
     private Integer codigo;
     private String descricao;
 
-    private Perfil(Integer codigo, String descricao) {
+    private Generos(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -19,17 +20,17 @@ public enum Perfil {
         return descricao;
     }
 
-    public static Perfil toEnum(Integer cod) {
+    public static Generos toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
 
-        for(Perfil x : Perfil.values()) {
+        for(Generos x : Generos.values()) {
             if(cod.equals(x.getCodigo())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Perfil inválido");
+        throw new IllegalArgumentException("Genero inválido");
     }
 }

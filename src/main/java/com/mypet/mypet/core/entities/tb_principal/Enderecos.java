@@ -1,5 +1,7 @@
 package com.mypet.mypet.core.entities.tb_principal;
 
+import com.mypet.mypet.domain.enums.TipoEndereco;
+import com.mypet.mypet.domain.model.Pessoas;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,18 +21,21 @@ public class Enderecos implements Serializable {
 
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Id
-        private long enderecoId;
+        private long id;
+    @Enumerated(EnumType.STRING)
+    private TipoEndereco enderecoTipo;
 
-        private String enderecoTipo;
+
         private String logadouro;
         private int numeroCasa;
         private String bairro;
         private String cidade;
         private String uf;
         private String cep;
+        private String complemento;
          @ManyToOne
-         @JoinColumn(name = "cpf")
-         private Pessoas enderecoCpf;
+         @JoinColumn(name = "PessoaId")
+         private Pessoas pessoaId;
 
        // @ManyToOne
       //  @JoinColumn(name = "enderecos_id")

@@ -1,6 +1,6 @@
 package com.mypet.mypet.domain.dto;
 
-import com.mypet.mypet.core.entities.tb_principal.Pessoas;
+import com.mypet.mypet.domain.model.Pessoas;
 import lombok.*;
 
 import java.time.LocalDate;

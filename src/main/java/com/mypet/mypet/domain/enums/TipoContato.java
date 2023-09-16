@@ -1,12 +1,12 @@
 package com.mypet.mypet.domain.enums;
 
-public enum Status {
-    ATIVO(0, "ATIVO"), BLOQUEADO(1, "BLOQUEADO"), INATIVO(2, "INATIVO");
+public enum TipoContato {
+    PRINCIPAL(0, "CONTATO PRINCIPAL"), CONTATO2(1, "CONTATO SECUNDARIO"), CONTATO3(2, "TERCEIRO CONTATO");
 
     private Integer codigo;
     private String descricao;
 
-    private Status(Integer codigo, String descricao) {
+    private TipoContato(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -19,17 +19,17 @@ public enum Status {
         return descricao;
     }
 
-    public static Status toEnum(Integer cod) {
+    public static TipoContato toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
 
-        for(Status x : Status.values()) {
+        for(TipoContato x : TipoContato.values()) {
             if(cod.equals(x.getCodigo())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Status inválido");
+        throw new IllegalArgumentException("Tipo de contato inválido");
     }
 }

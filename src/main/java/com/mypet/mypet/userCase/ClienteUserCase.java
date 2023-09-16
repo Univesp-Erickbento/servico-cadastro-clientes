@@ -1,6 +1,6 @@
 package com.mypet.mypet.userCase;
 
-import com.mypet.mypet.core.entities.tb_principal.Pessoas;
+import com.mypet.mypet.domain.model.Pessoas;
 import com.mypet.mypet.domain.dto.ClienteDTO;
 import com.mypet.mypet.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

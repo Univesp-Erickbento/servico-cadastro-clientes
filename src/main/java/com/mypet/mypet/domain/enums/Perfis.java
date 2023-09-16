@@ -1,12 +1,12 @@
 package com.mypet.mypet.domain.enums;
 
-public enum Status {
-    ATIVO(0, "ATIVO"), BLOQUEADO(1, "BLOQUEADO"), INATIVO(2, "INATIVO");
+public enum Perfis {
+    ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
 
     private Integer codigo;
     private String descricao;
 
-    private Status(Integer codigo, String descricao) {
+    private Perfis(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -19,17 +19,17 @@ public enum Status {
         return descricao;
     }
 
-    public static Status toEnum(Integer cod) {
+    public static Perfis toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
 
-        for(Status x : Status.values()) {
+        for(Perfis x : Perfis.values()) {
             if(cod.equals(x.getCodigo())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Status inválido");
+        throw new IllegalArgumentException("Perfil inválido");
     }
 }

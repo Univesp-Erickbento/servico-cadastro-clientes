@@ -1,15 +1,10 @@
 package com.mypet.mypet.core.entities.tb_relacionamentos;
 
 import com.mypet.mypet.core.entities.tb_pk.PessoaContatoPK;
-import com.mypet.mypet.core.entities.tb_principal.Contatos;
-import com.mypet.mypet.core.entities.tb_principal.Pessoas;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.List;
 
 @ToString
 @Data
