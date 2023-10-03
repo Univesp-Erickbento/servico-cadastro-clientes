@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+@Entity
+@Table(name = "Funcionario")
+
 public class Funcionarios extends Pessoas implements Serializable {
 
     private static final long serialVersionUID = 1l;
@@ -47,5 +50,9 @@ public class Funcionarios extends Pessoas implements Serializable {
         this.funcionarioStatus = funcionarioStatus;
         this.departamento = departamento;
         this.dataDeAdimissao = dataDeAdimissao;
+    }
+
+    public Funcionarios() {
+
     }
 }
