@@ -28,7 +28,7 @@ public class FuncionarioController {
     public ResponseEntity<Funcionarios> saveFuncionario (@RequestBody @Valid FuncionarioRecordDto funcionarioRecordDto) {
         var funcionario = new Funcionarios();
         BeanUtils.copyProperties(funcionarioRecordDto, funcionario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(FuncionarioRepository.save(funcionario));
+        return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioRepository.save(funcionario));
     }
     @GetMapping
     public List<ClienteDTO> findAll(){

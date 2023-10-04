@@ -51,8 +51,7 @@ public abstract class Pessoas implements Serializable {
         protected LocalDate dataDeCadastro = LocalDate.now();
 
         protected Pessoas(final long id, final String name, final String lastName, final String email, final String cpf,
-                          final String rg, final Generos genero, final Set<Integer> perfil, final List<Enderecos> enderecos1,
-                          final List<Contatos> contatos, final LocalDate dataDeNasc) {
+                          final String rg, final Generos genero,  final LocalDate dataDeNasc) {
                 this.id = id;
                 this.name = name;
                 this.lastName = lastName;
@@ -60,7 +59,6 @@ public abstract class Pessoas implements Serializable {
                 this.cpf = cpf;
                 this.rg = rg;
                 this.genero = genero;
-                this.perfil = perfil;
                 this.dataDeNasc = dataDeNasc;
         }
 
