@@ -1,5 +1,5 @@
-INSERT INTO Pessoas (name, last_Name, email, cpf, rg, data_De_Nasc) VALUES ('Erick Bento', 'Dias Ferreira', 'erickbento@yahoo.com.br', '11111111111', '222222222', '1982-09-12');
-INSERT INTO Pessoas (name, last_Name, email, cpf, rg, data_De_Nasc) VALUES ('Isaque Bento', 'Martins Ferreira', 'isaquebento@yahoo.com.br', '99999999999', '888888888', '2010-05-26');
+INSERT INTO Pessoas (name, last_Name, email, cpf, rg, dtype, data_De_Nasc) VALUES ('Erick Bento', 'Dias Ferreira', 'erickbento@yahoo.com.br', '11111111111', '222222222','NA', '1982-09-12');
+INSERT INTO Pessoas (name, last_Name, email, cpf, rg,dtype, data_De_Nasc) VALUES ('Isaque Bento', 'Martins Ferreira', 'isaquebento@yahoo.com.br', '99999999999', '888888888','NA', '2010-05-26');
 
 INSERT INTO Enderecos (logadouro,numero_casa, bairro, cidade, uf,cep) VALUES ('Ribeirão preto', 305, 'Olimpico','São Caetano do Sul', 'SP', '09570140');
 INSERT INTO Enderecos (logadouro,numero_casa, bairro, cidade, uf,cep) VALUES ('Recife', 112, 'Sacadura cabral','Santo André', 'SP', '09060730');

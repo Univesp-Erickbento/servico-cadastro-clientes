@@ -7,11 +7,12 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@Builder
+//@Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"enderecoId"})
+@Setter
+//@EqualsAndHashCode(of = {"enderecoId"})
 @Entity
 @Table(name = "ENDERECOS")
 public class Enderecos implements Serializable {
@@ -19,9 +20,11 @@ public class Enderecos implements Serializable {
         private static final long serialVersionUID =1l;
 
 
+
+
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Id
-        private long id;
+        private long enderecoId;
     @Enumerated(EnumType.STRING)
     private TipoEndereco enderecoTipo;
 
@@ -33,11 +36,11 @@ public class Enderecos implements Serializable {
         private String uf;
         private String cep;
         private String complemento;
-         @ManyToOne
-         @JoinColumn(name = "PessoaId")
-         private Pessoas pessoaId;
+        @ManyToOne
+        @JoinColumn(name = "pessoa_id")
+        private  Pessoas pessoa;
 
-       // @ManyToOne
-      //  @JoinColumn(name = "enderecos_id")
+
+
 
 }

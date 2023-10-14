@@ -5,11 +5,11 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@Builder
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = {"emailId"})
+//@Builder
+//@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@EqualsAndHashCode(of = {"emailId"})
 @Entity
 @Table(name = "EMAILS")
 public class Emails implements Serializable {
@@ -19,13 +19,13 @@ public class Emails implements Serializable {
 
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Id
-        private long emailId;
-
-        private String emailTipo;
-        private String email;
-       // private String emailCpf;
-
-       // @ManyToOne
-      //  @JoinColumn(name = "enderecos_id")
+         private long emailId;
+//
+//        private String emailTipo;
+//        private String email;
+//       // private String emailCpf;
+//
+//       // @ManyToOne
+//      //  @JoinColumn(name = "enderecos_id")
 
 }

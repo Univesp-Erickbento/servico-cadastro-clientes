@@ -18,20 +18,18 @@ import java.util.stream.Collectors;
 @Data
 //@Setter
 //@Getter
-//@Builder
 //@NoArgsConstructor
 //@AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
-@Entity
-@Table(name = "Pessoas")
-public abstract class Pessoas implements Serializable {
+//@EqualsAndHashCode(of = {"PessoaId"})
+@MappedSuperclass
+public  class Pessoas implements Serializable {
 
         private static final long serialVersionUID = 1l;
 
 
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Id
-        protected long id;
+        protected long pessoaId;
 
         protected String name;
         protected String lastName;
@@ -42,17 +40,21 @@ public abstract class Pessoas implements Serializable {
         @Enumerated(EnumType.STRING)
         protected Generos genero;
 
+       @OneToMany(mappedBy = "pessoa")
+
+       protected List<Enderecos> endereco = new  ArrayList<>();
+
         @ElementCollection(fetch =FetchType.EAGER)
         @CollectionTable(name = "Perfis")
         protected Set<Integer> perfil = new HashSet<>();
         protected LocalDate dataDeNasc;
 
-     //  @JsonFormat(pattern = "dd/MM/yyyy")
+        @JsonFormat(pattern = "dd/MM/yyyy")
         protected LocalDate dataDeCadastro = LocalDate.now();
 
         protected Pessoas(final long id, final String name, final String lastName, final String email, final String cpf,
                           final String rg, final Generos genero,  final LocalDate dataDeNasc) {
-                this.id = id;
+                this.pessoaId = id;
                 this.name = name;
                 this.lastName = lastName;
                 this.email = email;
@@ -60,17 +62,18 @@ public abstract class Pessoas implements Serializable {
                 this.rg = rg;
                 this.genero = genero;
                 this.dataDeNasc = dataDeNasc;
+                addPerfil(Perfis.FUNCIONARIO);
         }
 
         protected Pessoas(){
-         addPerfil(Perfis.CLIENTE);}
+         addPerfil(Perfis.FUNCIONARIO);}
 
         public long getId() {
-                return this.id;
+                return this.pessoaId;
         }
 
         public void setId(final long id) {
-                this.id = id;
+                this.pessoaId = id;
         }
 
         public String getName() {
@@ -141,12 +144,12 @@ public abstract class Pessoas implements Serializable {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Pessoas pessoas)) return false;
-        return id == pessoas.id && Objects.equals(cpf, pessoas.cpf);
+        return pessoaId == pessoas.pessoaId && Objects.equals(cpf, pessoas.cpf);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cpf);
+        return Objects.hash(pessoaId, cpf);
     }
 }
 

@@ -1,7 +1,7 @@
 package com.mypet.mypet.domain.enums;
 
 public enum TipoContato {
-    PRINCIPAL(0, "CONTATO PRINCIPAL"), CONTATO2(1, "CONTATO SECUNDARIO"), CONTATO3(2, "TERCEIRO CONTATO");
+    TELEFONE(0, "CELULAR OU RESIDENCIAL"), EMAIL(1, " E-MAIL");
 
     private Integer codigo;
     private String descricao;

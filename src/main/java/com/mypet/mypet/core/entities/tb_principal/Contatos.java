@@ -8,13 +8,12 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Builder
-@Getter
-@NoArgsConstructor
+//@Builder
+//@Getter
+//@NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"contatoId"})
+
 @Entity
-@Table(name = "CONTATOS")
 public class Contatos implements Serializable {
 
         private static final long serialVersionUID =1l;
@@ -23,18 +22,18 @@ public class Contatos implements Serializable {
 
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Id
-        private long id;
+             private long id;
 
-        private String contato;
-        @Enumerated(EnumType.STRING)
-        private TipoContato contatoTipo;
-
-        @ManyToOne
-        @JoinColumn(name = "PessoaId")
-        private Pessoas PessoaId;
-
-       // @ManyToOne
-      //  @JoinColumn(name = "enderecos_id")
+           private String contato;
+//        @Enumerated(EnumType.STRING)
+//        private TipoContato contatoTipo;
+//
+//        @ManyToOne
+//        @JoinColumn(name = "PessoaId")
+//        private Pessoas PessoaId;
+//
+//       // @ManyToOne
+//      //  @JoinColumn(name = "enderecos_id")
 
 
 
