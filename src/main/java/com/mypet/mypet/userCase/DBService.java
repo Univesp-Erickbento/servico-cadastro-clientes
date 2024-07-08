@@ -1,8 +1,5 @@
 package com.mypet.mypet.userCase;
 
-import com.mypet.mypet.domain.model.Funcionarios;
-import lombok.Builder;
-
 public class DBService {
 //@Builder
 //    Funcionarios fun1;

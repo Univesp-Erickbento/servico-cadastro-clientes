@@ -1,8 +1,7 @@
 package com.mypet.mypet.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mypet.mypet.domain.complementares.Cargos;
-import com.mypet.mypet.domain.model.Funcionarios;
+import com.mypet.mypet.domain.model.Funcionario;
 import lombok.*;
 
 import java.io.Serializable;
@@ -22,14 +21,13 @@ public class FuncionarioDTO implements Serializable {
 
     private   String funcionarioTipo;
     private  String funcionarioReg;
-    private Cargos cargo;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private  LocalDate dataDeAdimissao;
 
-    public FuncionarioDTO(Funcionarios obj) {
+    public FuncionarioDTO(Funcionario obj) {
         this.funcionarioTipo = obj.getFuncionarioTipo();
         this.funcionarioReg = obj.getFuncionarioReg();
-        this.cargo = obj.getCargo();
+  //      this.cargo = obj.getCargo();
         this.dataDeAdimissao = obj.getDataDeAdimissao();
     }
 }
