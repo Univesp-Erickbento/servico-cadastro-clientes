@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-
+//@DiscriminatorValue("funcionario")
 @Entity
 @Table(name = "Funcionarios")
 public class Funcionario extends Pessoa implements Serializable {
@@ -25,6 +25,13 @@ public class Funcionario extends Pessoa implements Serializable {
     @Id
     protected long id;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "pessoa_id", nullable = false) // Coluna na tabela clientes que referencia a tabela pessoas
+//    private Pessoa pessoaId; // Relacionamento com a tabela Pessoas
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pessoa_id", nullable = false)
+    private Pessoa pessoa;
     private String funcionarioTipo;
 
     private String funcionarioReg;

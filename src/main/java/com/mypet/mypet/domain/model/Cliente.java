@@ -15,9 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-
+//@DiscriminatorValue("cliente")
 @Entity
-@Table(name = "Cliente")
+@Table(name = "clientes")
 public class Cliente extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1l;
@@ -26,6 +26,13 @@ public class Cliente extends Pessoa implements Serializable {
     @Id
     protected long id;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "pessoa_id", nullable = false) // Coluna na tabela clientes que referencia a tabela pessoas
+//    private Pessoa pessoaId; // Relacionamento com a tabela Pessoas
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pessoa_id", nullable = false)
+    private Pessoa pessoa;
 
     private String clienteReg;
 
@@ -37,7 +44,9 @@ public class Cliente extends Pessoa implements Serializable {
 //    private List<Endereco> enderecos;
 
     // Relacionamento bidirecional com Endereco
-    @OneToMany(mappedBy = "clienteId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Endereco> enderecos;
+//    @OneToMany(mappedBy = "clienteId", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Endereco> enderecos;
+
+
 
 }
