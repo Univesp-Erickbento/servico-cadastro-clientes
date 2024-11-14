@@ -44,7 +44,8 @@ public class Pessoa implements Serializable {
         protected LocalDate dataCadastro = LocalDate.now();
 
 
-
+        public void setPessoa(long id) {
+        }
 
 
         public List<Perfis> perfis (Perfis perfil){
@@ -53,6 +54,8 @@ public class Pessoa implements Serializable {
                 return perfiList;
         }
 
+        public void setPessoa_id(long id) {
+        }
 }
 
 

@@ -1,14 +1,11 @@
 package com.mypet.mypet.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mypet.mypet.domain.core.model.Pessoa;
 import com.mypet.mypet.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -38,6 +35,8 @@ public class Cliente extends Pessoa implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Status clienteStatus;
+
+
 
 //    // Relacionamento um-para-muitos
 //    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

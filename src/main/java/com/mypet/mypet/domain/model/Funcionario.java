@@ -47,11 +47,16 @@ public class Funcionario extends Pessoa implements Serializable {
 //    @JoinColumn(name = "Departamento_Id")
 //    private Departamento departamento;
 
+//    @JsonFormat(pattern = "dd/MM/yyyy")
+//    private LocalDate dataCadastro = LocalDate.now();
+
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataDeCadastro = LocalDate.now();
+    @Column(name = "data_de_admissao")
+    private LocalDate dataDeAdmissao;
+
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataDeAdimissao;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataDeDemisao;
+    @Column(name = "data_de_demissao")
+    private LocalDate dataDeDemissao;
+
 
 }

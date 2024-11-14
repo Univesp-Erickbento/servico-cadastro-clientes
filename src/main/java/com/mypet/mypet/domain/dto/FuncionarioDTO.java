@@ -21,13 +21,13 @@ public class FuncionarioDTO implements Serializable {
 
     private   String funcionarioTipo;
     private  String funcionarioReg;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private  LocalDate dataDeAdimissao;
+//    @JsonFormat(pattern = "dd/MM/yyyy")
+//    private  LocalDate dataDeAdimissao;
 
-    public FuncionarioDTO(Funcionario obj) {
-        this.funcionarioTipo = obj.getFuncionarioTipo();
-        this.funcionarioReg = obj.getFuncionarioReg();
-  //      this.cargo = obj.getCargo();
-        this.dataDeAdimissao = obj.getDataDeAdimissao();
-    }
+//    public FuncionarioDTO(Funcionario obj) {
+//        this.funcionarioTipo = obj.getFuncionarioTipo();
+//        this.funcionarioReg = obj.getFuncionarioReg();
+//  //      this.cargo = obj.getCargo();
+//        this.dataDeAdimissao = obj.getDataDeAdimissao();
+//    }
 }
