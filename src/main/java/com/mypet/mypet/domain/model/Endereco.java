@@ -1,7 +1,5 @@
 package com.mypet.mypet.domain.model;
 
-import com.mypet.mypet.domain.core.model.Pessoa;
-import com.mypet.mypet.domain.enums.Status;
 import com.mypet.mypet.domain.enums.TipoEndereco;
 import jakarta.persistence.*;
 import lombok.*;

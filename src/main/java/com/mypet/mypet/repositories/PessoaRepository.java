@@ -1,6 +1,6 @@
 package com.mypet.mypet.repositories;
 
-import com.mypet.mypet.domain.core.model.Pessoa;
+import com.mypet.mypet.domain.model.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

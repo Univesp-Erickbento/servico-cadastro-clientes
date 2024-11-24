@@ -1,6 +1,4 @@
-package com.mypet.mypet.domain.core.model;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+package com.mypet.mypet.domain.model;
 
 import com.mypet.mypet.domain.enums.*;
 //import com.mypet.mypet.domain.model.Endereco;

@@ -1,5 +1,6 @@
 package com.mypet.mypet.controllers;
-import com.mypet.mypet.domain.model.Funcionario;
+
+import com.mypet.mypet.domain.dto.FuncionarioDTO;
 import com.mypet.mypet.userCase.FuncionarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,39 +11,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/funcionarios")
+@CrossOrigin(origins = "*")
 public class FuncionarioController {
 
     @Autowired
     private FuncionarioServiceImpl funcionarioService;
 
     @GetMapping
-    public ResponseEntity<List<Funcionario>> listarTodos() {
-        return new ResponseEntity<>(funcionarioService.listarTodos(), HttpStatus.OK);
+    public ResponseEntity<List<FuncionarioDTO>> listarTodos() {
+        List<FuncionarioDTO> funcionarios = funcionarioService.listarTodos();
+        return ResponseEntity.ok(funcionarios);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id) {
-        Funcionario funcionario = funcionarioService.buscarPorId(id);
-        if (funcionario != null) {
-            return new ResponseEntity<>(funcionario, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Long id) {
+        return funcionarioService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<Funcionario> salvar(@RequestBody Funcionario funcionario) {
-        return new ResponseEntity<>(funcionarioService.salvar(funcionario), HttpStatus.CREATED);
+    public ResponseEntity<FuncionarioDTO> salvar(@RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO funcionarioSalvo = funcionarioService.salvar(funcionarioDTO);
+        return new ResponseEntity<>(funcionarioSalvo, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Funcionario> atualizar(@PathVariable Long id, @RequestBody Funcionario funcionario) {
-        Funcionario funcionarioAtualizado = funcionarioService.atualizar(id, funcionario);
-        if (funcionarioAtualizado != null) {
-            return new ResponseEntity<>(funcionarioAtualizado, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<FuncionarioDTO> atualizar(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO funcionarioAtualizado = funcionarioService.atualizar(id, funcionarioDTO);
+        return funcionarioAtualizado != null ? ResponseEntity.ok(funcionarioAtualizado) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")

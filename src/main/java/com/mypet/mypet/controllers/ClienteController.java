@@ -11,52 +11,45 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
     @Autowired
     private ClienteServiceImpl clienteService;
 
-//    @GetMapping
-//    public ResponseEntity<List<Cliente>> listarTodos() {
-//        return new ResponseEntity<>(clienteService.listarTodos(), HttpStatus.OK);
-//    }
+    // Endpoint para listar todos os clientes
+    @GetMapping
+    public ResponseEntity<List<Cliente>> listarTodos() {
+        List<Cliente> clientes = clienteService.listarTodos();
+        return ResponseEntity.ok(clientes);
+    }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
-//        Cliente cliente = clienteService.buscarPorId(id);
-//        if (cliente != null) {
-//            return new ResponseEntity<>(cliente, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+    // Endpoint para buscar um cliente por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
+        return clienteService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
+    // Endpoint para adicionar um novo cliente
     @PostMapping
     public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
-        try {
-            Cliente clienteSalvo = clienteService.salvar(cliente);
-            return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);
-        } catch (Exception e) {
-            // Log de erro detalhado
-            System.err.println("Erro ao salvar o cliente: " + e.getMessage());
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Cliente clienteSalvo = clienteService.salvar(cliente);
+        return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);
+    }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
-//        Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
-//        if (clienteAtualizado != null) {
-//            return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+    // Endpoint para atualizar um cliente existente
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
+        Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
+        return clienteAtualizado != null ? ResponseEntity.ok(clienteAtualizado) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-//        clienteService.deletar(id);
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+    // Endpoint para deletar um cliente por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        clienteService.deletar(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

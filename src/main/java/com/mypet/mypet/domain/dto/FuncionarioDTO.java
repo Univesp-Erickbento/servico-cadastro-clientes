@@ -1,33 +1,20 @@
 package com.mypet.mypet.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mypet.mypet.domain.model.Funcionario;
-import lombok.*;
-
-import java.io.Serializable;
+import lombok.Data;
 import java.time.LocalDate;
-@ToString
+
 @Data
-@Setter
-@Builder
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+public class FuncionarioDTO {
+    private long pessoaId;
+    private String cpf;
+    private String funcionarioTipo;
+    private String funcionarioReg;
+    private String funcionarioStatus;
 
-public class FuncionarioDTO implements Serializable {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataDeAdmissao;
 
-    private static final long serialVersionUID = 1l;
-
-
-    private   String funcionarioTipo;
-    private  String funcionarioReg;
-//    @JsonFormat(pattern = "dd/MM/yyyy")
-//    private  LocalDate dataDeAdimissao;
-
-//    public FuncionarioDTO(Funcionario obj) {
-//        this.funcionarioTipo = obj.getFuncionarioTipo();
-//        this.funcionarioReg = obj.getFuncionarioReg();
-//  //      this.cargo = obj.getCargo();
-//        this.dataDeAdimissao = obj.getDataDeAdimissao();
-//    }
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataDeDemissao;
 }

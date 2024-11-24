@@ -1,7 +1,6 @@
 package com.mypet.mypet.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mypet.mypet.domain.core.model.Pessoa;
 import com.mypet.mypet.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,49 +13,30 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-//@DiscriminatorValue("funcionario")
 @Entity
 @Table(name = "Funcionarios")
-public class Funcionario extends Pessoa implements Serializable {
+public class Funcionario implements Serializable {
 
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    protected long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "pessoa_id", nullable = false) // Coluna na tabela clientes que referencia a tabela pessoas
-//    private Pessoa pessoaId; // Relacionamento com a tabela Pessoas
+    @Column(name = "pessoa_id", nullable = false)
+    private long pessoaId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pessoa_id", nullable = false)
-    private Pessoa pessoa;
     private String funcionarioTipo;
-
     private String funcionarioReg;
-//    @ManyToOne
-//    @JoinColumn(name = "Cargo_Id")
-//    private Cargos cargo;
 
     @Enumerated(EnumType.STRING)
     private Status funcionarioStatus;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "Departamento_Id")
-//    private Departamento departamento;
-
-//    @JsonFormat(pattern = "dd/MM/yyyy")
-//    private LocalDate dataCadastro = LocalDate.now();
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_admissao")
     private LocalDate dataDeAdmissao;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_demissao")
     private LocalDate dataDeDemissao;
-
-
 }

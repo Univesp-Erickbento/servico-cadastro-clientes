@@ -1,6 +1,5 @@
 package com.mypet.mypet.domain.model;
 
-import com.mypet.mypet.domain.core.model.Pessoa;
 import com.mypet.mypet.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +14,7 @@ import java.io.Serializable;
 //@DiscriminatorValue("cliente")
 @Entity
 @Table(name = "clientes")
-public class Cliente extends Pessoa implements Serializable {
+public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1l;
 
@@ -23,28 +22,15 @@ public class Cliente extends Pessoa implements Serializable {
     @Id
     protected long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "pessoa_id", nullable = false) // Coluna na tabela clientes que referencia a tabela pessoas
-//    private Pessoa pessoaId; // Relacionamento com a tabela Pessoas
 
-    @ManyToOne(fetch = FetchType.LAZY)
+   // @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pessoa_id", nullable = false)
-    private Pessoa pessoa;
+    private long pessoaId;
 
     private String clienteReg;
 
     @Enumerated(EnumType.STRING)
     private Status clienteStatus;
-
-
-
-//    // Relacionamento um-para-muitos
-//    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Endereco> enderecos;
-
-    // Relacionamento bidirecional com Endereco
-//    @OneToMany(mappedBy = "clienteId", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Endereco> enderecos;
 
 
 
