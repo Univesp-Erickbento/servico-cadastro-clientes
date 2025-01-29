@@ -37,7 +37,7 @@ public class PessoaController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
+    @PostMapping("/adicionar")
     public ResponseEntity<Pessoa> salvar(@RequestBody Pessoa pessoa) {
         Pessoa pessoaSalva = pessoaService.salvar(pessoa);
         return new ResponseEntity<>(pessoaSalva, HttpStatus.CREATED);
