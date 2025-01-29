@@ -13,8 +13,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 
 @Entity
-@Table(name = "Endereco")
-public class Endereco  implements Serializable {
+@Table(name = "Enderecos")
+public class EnderecosEntity implements Serializable {
 
     private static final long serialVersionUID = 1l;
 
@@ -28,11 +28,11 @@ public class Endereco  implements Serializable {
 
     @ManyToOne // Relacionamento muitos-para-um com Cliente
     @JoinColumn(name = "clienteId") // Nome da coluna estrangeira no banco de dados
-    private Cliente clienteId; // Este é o nome referenciado em 'mappedBy' na classe Cliente
+    private ClientesEntity clienteId; // Este é o nome referenciado em 'mappedBy' na classe Cliente
 
 
    // private Cliente clienteId;
-    private Funcionario funcionarioId;
+    private FuncionariosEntity funcionarioId;
 
     private String rua;
     private String numero;

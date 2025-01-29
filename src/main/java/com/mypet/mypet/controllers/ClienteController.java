@@ -1,6 +1,6 @@
 package com.mypet.mypet.controllers;
 
-import com.mypet.mypet.domain.model.Cliente;
+import com.mypet.mypet.domain.model.ClientesEntity;
 import com.mypet.mypet.userCase.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,14 +19,14 @@ public class ClienteController {
 
     // Endpoint para listar todos os clientes
     @GetMapping
-    public ResponseEntity<List<Cliente>> listarTodos() {
-        List<Cliente> clientes = clienteService.listarTodos();
+    public ResponseEntity<List<ClientesEntity>> listarTodos() {
+        List<ClientesEntity> clientes = clienteService.listarTodos();
         return ResponseEntity.ok(clientes);
     }
 
     // Endpoint para buscar um cliente por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<ClientesEntity> buscarPorId(@PathVariable Long id) {
         return clienteService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -34,15 +34,15 @@ public class ClienteController {
 
     // Endpoint para adicionar um novo cliente
     @PostMapping
-    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
-        Cliente clienteSalvo = clienteService.salvar(cliente);
+    public ResponseEntity<ClientesEntity> salvar(@RequestBody ClientesEntity cliente) {
+        ClientesEntity clienteSalvo = clienteService.salvar(cliente);
         return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);
     }
 
     // Endpoint para atualizar um cliente existente
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
-        Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
+    public ResponseEntity<ClientesEntity> atualizar(@PathVariable Long id, @RequestBody ClientesEntity clientesEntity) {
+        ClientesEntity clienteAtualizado = clienteService.atualizar(id, clientesEntity);
         return clienteAtualizado != null ? ResponseEntity.ok(clienteAtualizado) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

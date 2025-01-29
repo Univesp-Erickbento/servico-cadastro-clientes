@@ -1,6 +1,6 @@
 package com.mypet.mypet.domain.model;
 
-import com.mypet.mypet.domain.enums.Status;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,10 +11,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-//@DiscriminatorValue("cliente")
 @Entity
-@Table(name = "clientes")
-public class Cliente implements Serializable {
+@Table(name = "perfis")
+public class PerfisEntity implements Serializable {
 
     private static final long serialVersionUID = 1l;
 
@@ -27,11 +26,12 @@ public class Cliente implements Serializable {
     @JoinColumn(name = "pessoa_id", nullable = false)
     private long pessoaId;
 
-    private String clienteReg;
-
-    @Enumerated(EnumType.STRING)
-    private Status clienteStatus;
+    private String nomeUsario;
 
 
+    private String senha;
+
+    //@Enumerated(EnumType.STRING)
+    private String perfis;
 
 }

@@ -1,6 +1,6 @@
 package com.mypet.mypet.domain.dto;
 
-import com.mypet.mypet.domain.model.Pessoa;
+import com.mypet.mypet.domain.model.PessoasEntity;
 import com.mypet.mypet.domain.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private long id;
-    private Pessoa pessoa;
+    private PessoasEntity pessoa;
     private String clienteReg;
     private Status clienteStatus;
 

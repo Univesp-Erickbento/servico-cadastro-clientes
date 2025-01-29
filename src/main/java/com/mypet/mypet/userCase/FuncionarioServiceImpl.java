@@ -2,7 +2,7 @@ package com.mypet.mypet.userCase;
 
 import com.mypet.mypet.domain.dto.FuncionarioDTO;
 import com.mypet.mypet.domain.enums.Status;
-import com.mypet.mypet.domain.model.Funcionario;
+import com.mypet.mypet.domain.model.FuncionariosEntity;
 import com.mypet.mypet.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,8 @@ public class FuncionarioServiceImpl {
 
     @Transactional
     public FuncionarioDTO salvar(FuncionarioDTO funcionarioDTO) {
-        Funcionario funcionario = convertToEntity(funcionarioDTO);
-        Funcionario funcionarioSalvo = funcionarioRepository.save(funcionario);
+        FuncionariosEntity funcionario = convertToEntity(funcionarioDTO);
+        FuncionariosEntity funcionarioSalvo = funcionarioRepository.save(funcionario);
         return convertToDto(funcionarioSalvo);
     }
 
@@ -38,14 +38,14 @@ public class FuncionarioServiceImpl {
     @Transactional
     public FuncionarioDTO atualizar(Long id, FuncionarioDTO funcionarioDTO) {
         return funcionarioRepository.findById(id)
-                .map(funcionario -> {
-                    funcionario.setPessoaId(funcionarioDTO.getPessoaId());
-                    funcionario.setFuncionarioTipo(funcionarioDTO.getFuncionarioTipo());
-                    funcionario.setFuncionarioReg(funcionarioDTO.getFuncionarioReg());
-                    funcionario.setFuncionarioStatus(Status.valueOf(funcionarioDTO.getFuncionarioStatus()));
-                    funcionario.setDataDeAdmissao(funcionarioDTO.getDataDeAdmissao());
-                    funcionario.setDataDeDemissao(funcionarioDTO.getDataDeDemissao());
-                    Funcionario funcionarioAtualizado = funcionarioRepository.save(funcionario);
+                .map(funcionariosEntity -> {
+                    funcionariosEntity.setPessoaId(funcionarioDTO.getPessoaId());
+                    funcionariosEntity.setFuncionarioTipo(funcionarioDTO.getFuncionarioTipo());
+                    funcionariosEntity.setFuncionarioReg(funcionarioDTO.getFuncionarioReg());
+                    funcionariosEntity.setFuncionarioStatus(Status.valueOf(funcionarioDTO.getFuncionarioStatus()));
+                    funcionariosEntity.setDataDeAdmissao(funcionarioDTO.getDataDeAdmissao());
+                    funcionariosEntity.setDataDeDemissao(funcionarioDTO.getDataDeDemissao());
+                    FuncionariosEntity funcionarioAtualizado = funcionarioRepository.save(funcionariosEntity);
                     return convertToDto(funcionarioAtualizado);
                 })
                 .orElse(null);
@@ -56,7 +56,7 @@ public class FuncionarioServiceImpl {
         funcionarioRepository.deleteById(id);
     }
 
-    private FuncionarioDTO convertToDto(Funcionario funcionario) {
+    private FuncionarioDTO convertToDto(FuncionariosEntity funcionario) {
         FuncionarioDTO dto = new FuncionarioDTO();
         dto.setPessoaId(funcionario.getPessoaId());
         dto.setFuncionarioTipo(funcionario.getFuncionarioTipo());
@@ -67,8 +67,8 @@ public class FuncionarioServiceImpl {
         return dto;
     }
 
-    private Funcionario convertToEntity(FuncionarioDTO dto) {
-        Funcionario funcionario = new Funcionario();
+    private FuncionariosEntity convertToEntity(FuncionarioDTO dto) {
+        FuncionariosEntity funcionario = new FuncionariosEntity();
         funcionario.setPessoaId(dto.getPessoaId());
         funcionario.setFuncionarioTipo(dto.getFuncionarioTipo());
         funcionario.setFuncionarioReg(dto.getFuncionarioReg());

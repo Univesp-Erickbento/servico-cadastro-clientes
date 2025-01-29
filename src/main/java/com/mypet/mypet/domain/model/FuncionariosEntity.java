@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @Entity
 @Table(name = "Funcionarios")
-public class Funcionario implements Serializable {
+public class FuncionariosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

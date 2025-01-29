@@ -1,6 +1,6 @@
 package com.mypet.mypet.userCase;
 
-import com.mypet.mypet.domain.model.Pessoa;
+import com.mypet.mypet.domain.model.PessoasEntity;
 import com.mypet.mypet.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,42 +17,42 @@ public class PessoaServiceImpl {
 
     // Método para salvar uma pessoa
     @Transactional
-    public Pessoa salvar(Pessoa pessoa) {
+    public PessoasEntity salvar(PessoasEntity pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
     // Método para listar todas as pessoas
-    public List<Pessoa> listarTodas() {
+    public List<PessoasEntity> listarTodas() {
         return pessoaRepository.findAll();
     }
 
     // Método para buscar uma pessoa por ID
-    public Optional<Pessoa> buscarPorId(Long id) {
+    public Optional<PessoasEntity> buscarPorId(Long id) {
         return pessoaRepository.findById(id);
     }
 
     // Método para buscar uma pessoa por CPF
-    public Optional<Pessoa> buscarPorCpf(String cpf) {
+    public Optional<PessoasEntity> buscarPorCpf(String cpf) {
         return pessoaRepository.findByCpf(cpf);
     }
 
     // Método para atualizar uma pessoa existente
     @Transactional
-    public Pessoa atualizar(Long id, Pessoa pessoaAtualizada) {
-        Optional<Pessoa> pessoaExistente = pessoaRepository.findById(id);
+    public PessoasEntity atualizar(Long id, PessoasEntity pessoaAtualizada) {
+        Optional<PessoasEntity> pessoaExistente = pessoaRepository.findById(id);
         if (pessoaExistente.isPresent()) {
-            Pessoa pessoa = pessoaExistente.get();
-            pessoa.setNome(pessoaAtualizada.getNome());
-            pessoa.setSobrenome(pessoaAtualizada.getSobrenome());
-            pessoa.setCpf(pessoaAtualizada.getCpf());
-            pessoa.setRg(pessoaAtualizada.getRg());
-            pessoa.setGenero(pessoaAtualizada.getGenero());
-            pessoa.setPerfis(pessoaAtualizada.getPerfis());
-            pessoa.setEmail(pessoaAtualizada.getEmail());
-            pessoa.setContato(pessoaAtualizada.getContato());
-            pessoa.setDataNascimento(pessoaAtualizada.getDataNascimento());
-            pessoa.setDataCadastro(pessoaAtualizada.getDataCadastro());
-            return pessoaRepository.save(pessoa);
+            PessoasEntity pessoasEntity = pessoaExistente.get();
+            pessoasEntity.setNome(pessoaAtualizada.getNome());
+            pessoasEntity.setSobrenome(pessoaAtualizada.getSobrenome());
+            pessoasEntity.setCpf(pessoaAtualizada.getCpf());
+            pessoasEntity.setRg(pessoaAtualizada.getRg());
+            pessoasEntity.setGenero(pessoaAtualizada.getGenero());
+            pessoasEntity.setPerfis(pessoaAtualizada.getPerfis());
+            pessoasEntity.setEmail(pessoaAtualizada.getEmail());
+            pessoasEntity.setContato(pessoaAtualizada.getContato());
+            pessoasEntity.setDataNascimento(pessoaAtualizada.getDataNascimento());
+            pessoasEntity.setDataCadastro(pessoaAtualizada.getDataCadastro());
+            return pessoaRepository.save(pessoasEntity);
         }
         return null;
     }

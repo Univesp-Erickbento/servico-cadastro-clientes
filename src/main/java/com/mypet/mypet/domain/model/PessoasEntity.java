@@ -1,6 +1,5 @@
 package com.mypet.mypet.domain.model;
 
-import com.mypet.mypet.domain.enums.*;
 //import com.mypet.mypet.domain.model.Endereco;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
@@ -23,7 +22,7 @@ import java.util.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Pessoa implements Serializable {
+public class PessoasEntity implements Serializable {
         private static final long serialVersionUID = 1L;
 
         @Id
@@ -46,8 +45,8 @@ public class Pessoa implements Serializable {
         }
 
 
-        public List<Perfis> perfis (Perfis perfil){
-                List<Perfis> perfiList = new ArrayList<>();
+        public List<PerfisEntity> perfis (PerfisEntity perfil){
+                List<PerfisEntity> perfiList = new ArrayList<>();
                 perfiList.add(perfil);
                 return perfiList;
         }

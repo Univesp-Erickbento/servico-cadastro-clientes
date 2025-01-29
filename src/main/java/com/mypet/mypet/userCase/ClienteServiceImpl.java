@@ -1,6 +1,6 @@
 package com.mypet.mypet.userCase;
 
-import com.mypet.mypet.domain.model.Cliente;
+import com.mypet.mypet.domain.model.ClientesEntity;
 import com.mypet.mypet.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,26 +17,26 @@ public class ClienteServiceImpl {
 
     // Método para salvar um cliente
     @Transactional
-    public Cliente salvar(Cliente cliente) {
+    public ClientesEntity salvar(ClientesEntity cliente) {
         return clienteRepository.save(cliente);
     }
 
     // Método para listar todos os clientes
-    public List<Cliente> listarTodos() {
+    public List<ClientesEntity> listarTodos() {
         return clienteRepository.findAll();
     }
 
     // Método para buscar um cliente por ID
-    public Optional<Cliente> buscarPorId(Long id) {
+    public Optional<ClientesEntity> buscarPorId(Long id) {
         return clienteRepository.findById(id);
     }
 
     // Método para atualizar um cliente existente
     @Transactional
-    public Cliente atualizar(Long id, Cliente clienteAtualizado) {
-        Optional<Cliente> clienteExistente = clienteRepository.findById(id);
+    public ClientesEntity atualizar(Long id, ClientesEntity clienteAtualizado) {
+        Optional<ClientesEntity> clienteExistente = clienteRepository.findById(id);
         if (clienteExistente.isPresent()) {
-            Cliente cliente = clienteExistente.get();
+            ClientesEntity cliente = clienteExistente.get();
             cliente.setPessoaId(clienteAtualizado.getPessoaId());
             cliente.setClienteReg(clienteAtualizado.getClienteReg());
             cliente.setClienteStatus(clienteAtualizado.getClienteStatus());

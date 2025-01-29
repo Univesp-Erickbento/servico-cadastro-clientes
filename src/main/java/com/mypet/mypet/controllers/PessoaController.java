@@ -1,6 +1,6 @@
 package com.mypet.mypet.controllers;
 
-import com.mypet.mypet.domain.model.Pessoa;
+import com.mypet.mypet.domain.model.PessoasEntity;
 import com.mypet.mypet.userCase.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,34 +18,34 @@ public class PessoaController {
     private PessoaServiceImpl pessoaService;
 
     @GetMapping
-    public ResponseEntity<List<Pessoa>> listarTodas() {
-        List<Pessoa> pessoas = pessoaService.listarTodas();
+    public ResponseEntity<List<PessoasEntity>> listarTodas() {
+        List<PessoasEntity> pessoas = pessoaService.listarTodas();
         return ResponseEntity.ok(pessoas);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pessoa> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<PessoasEntity> buscarPorId(@PathVariable Long id) {
         return pessoaService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<Pessoa> buscarPorCpf(@PathVariable String cpf) {
+    public ResponseEntity<PessoasEntity> buscarPorCpf(@PathVariable String cpf) {
         return pessoaService.buscarPorCpf(cpf)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Pessoa> salvar(@RequestBody Pessoa pessoa) {
-        Pessoa pessoaSalva = pessoaService.salvar(pessoa);
+    public ResponseEntity<PessoasEntity> salvar(@RequestBody PessoasEntity pessoa) {
+        PessoasEntity pessoaSalva = pessoaService.salvar(pessoa);
         return new ResponseEntity<>(pessoaSalva, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pessoa> atualizar(@PathVariable Long id, @RequestBody Pessoa pessoa) {
-        Pessoa pessoaAtualizada = pessoaService.atualizar(id, pessoa);
+    public ResponseEntity<PessoasEntity> atualizar(@PathVariable Long id, @RequestBody PessoasEntity pessoa) {
+        PessoasEntity pessoaAtualizada = pessoaService.atualizar(id, pessoa);
         return pessoaAtualizada != null ? ResponseEntity.ok(pessoaAtualizada) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
