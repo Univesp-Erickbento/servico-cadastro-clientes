@@ -12,8 +12,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "perfis")
-public class PerfisEntity implements Serializable {
+@Table(name = "tb_login")
+public class LoginEntity implements Serializable {
 
     private static final long serialVersionUID = 1l;
 

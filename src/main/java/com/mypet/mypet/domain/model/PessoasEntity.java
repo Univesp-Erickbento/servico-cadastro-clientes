@@ -17,7 +17,7 @@ import java.util.*;
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorColumn(name = "perfis")
 @Entity
-@Table(name = "pessoas")
+@Table(name = "tb_pessoas")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -45,8 +45,8 @@ public class PessoasEntity implements Serializable {
         }
 
 
-        public List<PerfisEntity> perfis (PerfisEntity perfil){
-                List<PerfisEntity> perfiList = new ArrayList<>();
+        public List<LoginEntity> perfis (LoginEntity perfil){
+                List<LoginEntity> perfiList = new ArrayList<>();
                 perfiList.add(perfil);
                 return perfiList;
         }

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 
 @Entity
-@Table(name = "Enderecos")
+@Table(name = "tb_Enderecos")
 public class EnderecosEntity implements Serializable {
 
     private static final long serialVersionUID = 1l;

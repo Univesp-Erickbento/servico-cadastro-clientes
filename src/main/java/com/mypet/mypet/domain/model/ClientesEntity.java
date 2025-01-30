@@ -13,7 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 //@DiscriminatorValue("cliente")
 @Entity
-@Table(name = "clientes")
+@Table(name = "tb_clientes")
 public class ClientesEntity implements Serializable {
 
     private static final long serialVersionUID = 1l;
