@@ -24,34 +24,34 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PessoasEntity> buscarPorId(@PathVariable Long id) {
-        return pessoaService.buscarPorId(id)
+    public ResponseEntity<PessoasEntity> buscarPorId(@PathVariable Long id, @RequestHeader("Authorization") String authorizationHeader) {
+        return pessoaService.buscarPorId(id, authorizationHeader)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<PessoasEntity> buscarPorCpf(@PathVariable String cpf) {
-        return pessoaService.buscarPorCpf(cpf)
+    public ResponseEntity<PessoasEntity> buscarPorCpf(@PathVariable String cpf, @RequestHeader("Authorization") String authorizationHeader) {
+        return pessoaService.buscarPorCpf(cpf, authorizationHeader)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<PessoasEntity> salvar(@RequestBody PessoasEntity pessoa) {
-        PessoasEntity pessoaSalva = pessoaService.salvar(pessoa);
+    public ResponseEntity<PessoasEntity> salvar(@RequestBody PessoasEntity pessoa, @RequestHeader("Authorization") String authorizationHeader) {
+        PessoasEntity pessoaSalva = pessoaService.salvar(pessoa, authorizationHeader);
         return new ResponseEntity<>(pessoaSalva, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PessoasEntity> atualizar(@PathVariable Long id, @RequestBody PessoasEntity pessoa) {
-        PessoasEntity pessoaAtualizada = pessoaService.atualizar(id, pessoa);
+    public ResponseEntity<PessoasEntity> atualizar(@PathVariable Long id, @RequestBody PessoasEntity pessoa, @RequestHeader("Authorization") String authorizationHeader) {
+        PessoasEntity pessoaAtualizada = pessoaService.atualizar(id, pessoa, authorizationHeader);
         return pessoaAtualizada != null ? ResponseEntity.ok(pessoaAtualizada) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        pessoaService.deletar(id);
+    public ResponseEntity<Void> deletar(@PathVariable Long id, @RequestHeader("Authorization") String authorizationHeader) {
+        pessoaService.deletar(id, authorizationHeader);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

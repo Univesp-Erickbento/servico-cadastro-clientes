@@ -29,8 +29,10 @@ public class FuncionariosEntity implements Serializable {
     private String funcionarioTipo;
     private String funcionarioReg;
 
-    @Enumerated(EnumType.STRING)
-    private Status funcionarioStatus;
+  //  @Enumerated(EnumType.STRING)
+   // private Status funcionarioStatus;
+
+    private String funcionarioStatus;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_admissao")

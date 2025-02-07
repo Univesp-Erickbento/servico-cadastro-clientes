@@ -1,11 +1,14 @@
 package com.mypet.mypet.domain.model;
 
 
+import com.mypet.mypet.domain.dto.login.LoginRequest;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.Serializable;
-
+import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,23 +18,41 @@ import java.io.Serializable;
 @Table(name = "tb_login")
 public class LoginEntity implements Serializable {
 
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    protected long id;
+    @GeneratedValue(strategy = GenerationType.AUTO) // AUTO para gerar o UUID automaticamente
+    protected Long id;
 
-
-   // @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pessoa_id", nullable = false)
     private long pessoaId;
 
-    private String nomeUsario;
-
+    private String nomeUsuario;
 
     private String senha;
 
-    //@Enumerated(EnumType.STRING)
     private String perfis;
 
+
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(loginRequest.senha(), this.senha);
+    }
 }

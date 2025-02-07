@@ -18,33 +18,33 @@ public class FuncionarioController {
     private FuncionarioServiceImpl funcionarioService;
 
     @GetMapping
-    public ResponseEntity<List<FuncionarioDTO>> listarTodos() {
-        List<FuncionarioDTO> funcionarios = funcionarioService.listarTodos();
+    public ResponseEntity<List<FuncionarioDTO>> listarTodos(@RequestHeader("Authorization") String authorizationHeader) {
+        List<FuncionarioDTO> funcionarios = funcionarioService.listarTodos(authorizationHeader);
         return ResponseEntity.ok(funcionarios);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Long id) {
-        return funcionarioService.buscarPorId(id)
+    public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Long id, @RequestHeader("Authorization") String authorizationHeader) {
+        return funcionarioService.buscarPorId(id, authorizationHeader)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<FuncionarioDTO> salvar(@RequestBody FuncionarioDTO funcionarioDTO) {
-        FuncionarioDTO funcionarioSalvo = funcionarioService.salvar(funcionarioDTO);
+    public ResponseEntity<FuncionarioDTO> salvar(@RequestBody FuncionarioDTO funcionarioDTO, @RequestHeader("Authorization") String authorizationHeader) {
+        FuncionarioDTO funcionarioSalvo = funcionarioService.salvar(funcionarioDTO, authorizationHeader);
         return new ResponseEntity<>(funcionarioSalvo, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FuncionarioDTO> atualizar(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
-        FuncionarioDTO funcionarioAtualizado = funcionarioService.atualizar(id, funcionarioDTO);
+    public ResponseEntity<FuncionarioDTO> atualizar(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO, @RequestHeader("Authorization") String authorizationHeader) {
+        FuncionarioDTO funcionarioAtualizado = funcionarioService.atualizar(id, funcionarioDTO, authorizationHeader);
         return funcionarioAtualizado != null ? ResponseEntity.ok(funcionarioAtualizado) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        funcionarioService.deletar(id);
+    public ResponseEntity<Void> deletar(@PathVariable Long id, @RequestHeader("Authorization") String authorizationHeader) {
+        funcionarioService.deletar(id, authorizationHeader);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -32,6 +32,35 @@ public class ClientesEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status clienteStatus;
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public long getPessoaId() {
+        return pessoaId;
+    }
+
+    public void setPessoaId(long pessoaId) {
+        this.pessoaId = pessoaId;
+    }
+
+    public String getClienteReg() {
+        return clienteReg;
+    }
+
+    public void setClienteReg(String clienteReg) {
+        this.clienteReg = clienteReg;
+    }
+
+    public Status getClienteStatus() {
+        return clienteStatus;
+    }
+
+    public void setClienteStatus(Status clienteStatus) {
+        this.clienteStatus = clienteStatus;
+    }
 }

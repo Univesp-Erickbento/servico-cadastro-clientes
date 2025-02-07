@@ -17,42 +17,53 @@ public class FuncionarioServiceImpl {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private com.mypet.mypet.userCase.AuthService authService; // Injeção do AuthService
+
     @Transactional
-    public FuncionarioDTO salvar(FuncionarioDTO funcionarioDTO) {
+    public FuncionarioDTO salvar(FuncionarioDTO funcionarioDTO, String authorizationHeader) {
+        // Validar o token de autorização
+        String token = authService.getToken(authorizationHeader); // Aqui estamos usando o AuthService para validar o token
+
+        // Agora que o token foi validado, podemos proceder com a lógica de salvar o funcionário
         FuncionariosEntity funcionario = convertToEntity(funcionarioDTO);
         FuncionariosEntity funcionarioSalvo = funcionarioRepository.save(funcionario);
         return convertToDto(funcionarioSalvo);
     }
 
-    public List<FuncionarioDTO> listarTodos() {
+    public List<FuncionarioDTO> listarTodos(String authorizationHeader) {
+        // Use o token de autorização conforme necessário
         return funcionarioRepository.findAll().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
-    public Optional<FuncionarioDTO> buscarPorId(Long id) {
+    public Optional<FuncionarioDTO> buscarPorId(Long id, String authorizationHeader) {
+        // Use o token de autorização conforme necessário
         return funcionarioRepository.findById(id)
                 .map(this::convertToDto);
     }
 
     @Transactional
-    public FuncionarioDTO atualizar(Long id, FuncionarioDTO funcionarioDTO) {
+    public FuncionarioDTO atualizar(Long id, FuncionarioDTO funcionarioDTO, String authorizationHeader) {
         return funcionarioRepository.findById(id)
                 .map(funcionariosEntity -> {
                     funcionariosEntity.setPessoaId(funcionarioDTO.getPessoaId());
                     funcionariosEntity.setFuncionarioTipo(funcionarioDTO.getFuncionarioTipo());
                     funcionariosEntity.setFuncionarioReg(funcionarioDTO.getFuncionarioReg());
-                    funcionariosEntity.setFuncionarioStatus(Status.valueOf(funcionarioDTO.getFuncionarioStatus()));
+                    funcionariosEntity.setFuncionarioStatus(funcionarioDTO.getFuncionarioStatus());
                     funcionariosEntity.setDataDeAdmissao(funcionarioDTO.getDataDeAdmissao());
                     funcionariosEntity.setDataDeDemissao(funcionarioDTO.getDataDeDemissao());
                     FuncionariosEntity funcionarioAtualizado = funcionarioRepository.save(funcionariosEntity);
+                    // Use o token de autorização conforme necessário
                     return convertToDto(funcionarioAtualizado);
                 })
                 .orElse(null);
     }
 
     @Transactional
-    public void deletar(Long id) {
+    public void deletar(Long id, String authorizationHeader) {
+        // Use o token de autorização conforme necessário
         funcionarioRepository.deleteById(id);
     }
 
@@ -61,7 +72,7 @@ public class FuncionarioServiceImpl {
         dto.setPessoaId(funcionario.getPessoaId());
         dto.setFuncionarioTipo(funcionario.getFuncionarioTipo());
         dto.setFuncionarioReg(funcionario.getFuncionarioReg());
-        dto.setFuncionarioStatus(funcionario.getFuncionarioStatus().name());
+        dto.setFuncionarioStatus(funcionario.getFuncionarioStatus());
         dto.setDataDeAdmissao(funcionario.getDataDeAdmissao());
         dto.setDataDeDemissao(funcionario.getDataDeDemissao());
         return dto;
@@ -72,7 +83,7 @@ public class FuncionarioServiceImpl {
         funcionario.setPessoaId(dto.getPessoaId());
         funcionario.setFuncionarioTipo(dto.getFuncionarioTipo());
         funcionario.setFuncionarioReg(dto.getFuncionarioReg());
-        funcionario.setFuncionarioStatus(Status.valueOf(dto.getFuncionarioStatus()));
+        funcionario.setFuncionarioStatus(dto.getFuncionarioStatus());
         funcionario.setDataDeAdmissao(dto.getDataDeAdmissao());
         funcionario.setDataDeDemissao(dto.getDataDeDemissao());
         return funcionario;

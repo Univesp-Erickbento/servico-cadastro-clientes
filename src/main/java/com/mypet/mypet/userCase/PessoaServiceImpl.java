@@ -17,7 +17,8 @@ public class PessoaServiceImpl {
 
     // Método para salvar uma pessoa
     @Transactional
-    public PessoasEntity salvar(PessoasEntity pessoa) {
+    public PessoasEntity salvar(PessoasEntity pessoa, String authorizationHeader) {
+        // Use o token de autorização conforme necessário
         return pessoaRepository.save(pessoa);
     }
 
@@ -27,18 +28,20 @@ public class PessoaServiceImpl {
     }
 
     // Método para buscar uma pessoa por ID
-    public Optional<PessoasEntity> buscarPorId(Long id) {
+    public Optional<PessoasEntity> buscarPorId(Long id, String authorizationHeader) {
+        // Use o token de autorização conforme necessário
         return pessoaRepository.findById(id);
     }
 
     // Método para buscar uma pessoa por CPF
-    public Optional<PessoasEntity> buscarPorCpf(String cpf) {
+    public Optional<PessoasEntity> buscarPorCpf(String cpf, String authorizationHeader) {
+        // Use o token de autorização conforme necessário
         return pessoaRepository.findByCpf(cpf);
     }
 
     // Método para atualizar uma pessoa existente
     @Transactional
-    public PessoasEntity atualizar(Long id, PessoasEntity pessoaAtualizada) {
+    public PessoasEntity atualizar(Long id, PessoasEntity pessoaAtualizada, String authorizationHeader) {
         Optional<PessoasEntity> pessoaExistente = pessoaRepository.findById(id);
         if (pessoaExistente.isPresent()) {
             PessoasEntity pessoasEntity = pessoaExistente.get();
@@ -52,6 +55,7 @@ public class PessoaServiceImpl {
             pessoasEntity.setContato(pessoaAtualizada.getContato());
             pessoasEntity.setDataNascimento(pessoaAtualizada.getDataNascimento());
             pessoasEntity.setDataCadastro(pessoaAtualizada.getDataCadastro());
+            // Use o token de autorização conforme necessário
             return pessoaRepository.save(pessoasEntity);
         }
         return null;
@@ -59,7 +63,8 @@ public class PessoaServiceImpl {
 
     // Método para deletar uma pessoa por ID
     @Transactional
-    public void deletar(Long id) {
+    public void deletar(Long id, String authorizationHeader) {
+        // Use o token de autorização conforme necessário
         pessoaRepository.deleteById(id);
     }
 }
