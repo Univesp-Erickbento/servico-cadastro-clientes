@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")  // Agrupando as rotas relacionadas a autenticação
+@CrossOrigin(origins = {"http://192.168.15.2:4200", "http://192.168.15.200:4200", "http://localhost:4200"})  // Adicionando a anotação CORS para todas as rotas
 public class LoginController {
 
     private final LoginService loginService;
