@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bmt-cadastro-de-pessoas
+  labels:
+    app: bmt-cadastro-de-pessoas
+spec:
+  replicas: 3  # Número de réplicas para alta disponibilidade
+  selector:
+    matchLabels:
+      app: bmt-cadastro-de-pessoas
+  template:
+    metadata:
+      labels:
+        app: bmt-cadastro-de-pessoas
+    spec:
+      containers:
+        - name: bmt-cadastro-de-pessoas
+          image: bmt-cadastro-de-pessoas:latest  # Imagem conforme o Docker
+          ports:
+            - containerPort: 9090  # Ajuste conforme a porta do serviço
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bmt-cadastro-de-pessoas-service
+spec:
+  selector:
+    app: bmt-cadastro-de-pessoas
+  ports:
+    - protocol: TCP
+      port: 80           # Porta exposta no Kubernetes (acessada por outros pods ou serviços)
+      targetPort: 9090    # Porta interna do container
+  type: ClusterIP  # Tipo de serviço para comunicação interna
