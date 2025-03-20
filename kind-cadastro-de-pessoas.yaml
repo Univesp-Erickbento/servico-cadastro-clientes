@@ -1,35 +1,27 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: bmt-cadastro-de-pessoas
-  labels:
-    app: bmt-cadastro-de-pessoas
-spec:
-  replicas: 3  # Número de réplicas para alta disponibilidade
-  selector:
-    matchLabels:
-      app: bmt-cadastro-de-pessoas
-  template:
-    metadata:
-      labels:
-        app: bmt-cadastro-de-pessoas
-    spec:
-      containers:
-        - name: bmt-cadastro-de-pessoas
-          image: bmt-cadastro-de-pessoas:latest  # Imagem conforme o Docker
-          ports:
-            - containerPort: 9090  # Ajuste conforme a porta do serviço
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: bmt-cadastro-de-pessoas  # Nome do cluster
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: bmt-cadastro-de-pessoas-service
-spec:
-  selector:
-    app: bmt-cadastro-de-pessoas
-  ports:
-    - protocol: TCP
-      port: 80           # Porta exposta no Kubernetes (acessada por outros pods ou serviços)
-      targetPort: 9090    # Porta interna do container
-  type: ClusterIP  # Tipo de serviço para comunicação interna
+# Configuração de rede
+networking:
+  disableDefaultCNI: false  # Não desabilite o CNI (Network Interface) padrão
+  # Caso precise de configuração de rede personalizada, descomente as linhas abaixo:
+  #podSubnet: "192.168.15.0/24"  # Faixa de IP fora da faixa da rede bmt-rede-docker
+  # serviceSubnet: "10.96.0.0/16"  # Faixa de IP para os serviços dentro do cluster
+  # nodePortAddresses:
+  #   - 0.0.0.0
+  # dnsDomain: cluster.local
+
+# Configuração dos nodes
+nodes:
+  - role: control-plane
+    extraPortMappings:  # Mapeamento de portas para o node worker
+      - containerPort: 30090
+        hostPort: 9090
+        protocol: TCP
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-ip: "172.18.0.3"  # Configura o IP fixo para o nó control-plane
