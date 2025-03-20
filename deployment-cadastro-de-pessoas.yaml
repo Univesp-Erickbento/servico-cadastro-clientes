@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bmt-cadastro-de-pessoas
+  labels:
+    app: bmt-cadastro-de-pessoas
+spec:
+  replicas: 1  # Número de réplicas para alta disponibilidade
+  selector:
+    matchLabels:
+      app: bmt-cadastro-de-pessoas
+  template:
+    metadata:
+      labels:
+        app: bmt-cadastro-de-pessoas
+    spec:
+      containers:
+        - name: bmt-cadastro-de-pessoas
+          image: bmt-cadastro-de-pessoas:0.0.9-SNAPSHOT # Imagem conforme o Docker
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9090  # Ajuste conforme a porta do serviço
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://192.168.15.115:5432/postgres # URL de conexão
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres  # Nome de usuário
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: sacadura10  # Senha
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bmt-cadastro-de-pessoas-service
+spec:
+  selector:
+    app: bmt-cadastro-de-pessoas
+  ports:
+    - protocol: TCP
+      port: 9090           # Porta exposta no Kubernetes (acessada por outros pods ou serviços)
+      targetPort: 9090     # Porta interna do container
+      nodePort: 30090      # Defina um número de porta exclusivo
+  type: NodePort  # Tipo de serviço para comunicação externa
+#  externalIPs:
+#    - 192.168.15.3  # IP externo que você deseja associar ao serviço
