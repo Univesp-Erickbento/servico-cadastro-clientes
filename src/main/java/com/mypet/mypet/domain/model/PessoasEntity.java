@@ -1,6 +1,7 @@
 package com.mypet.mypet.domain.model;
 
 //import com.mypet.mypet.domain.model.Endereco;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -37,7 +38,10 @@ public class PessoasEntity implements Serializable {
         protected String Perfis;
         protected String email;
         protected String contato;
+
+        @JsonFormat(pattern = "yyyy-MM-dd")
         protected LocalDate dataNascimento;
+
         protected LocalDate dataCadastro = LocalDate.now();
 
 

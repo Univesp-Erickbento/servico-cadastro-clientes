@@ -8,59 +8,27 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-//@DiscriminatorValue("cliente")
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "tb_clientes")
 public class ClientesEntity implements Serializable {
 
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    protected long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Long id;
 
+    @Column(name = "pessoa_id", nullable = false)
+    private Long pessoaId;
 
-   // @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pessoa_id", nullable = false)
-    private long pessoaId;
-
+    @Column(name = "cliente_reg")
     private String clienteReg;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "cliente_status")
     private Status clienteStatus;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(long pessoaId) {
-        this.pessoaId = pessoaId;
-    }
-
-    public String getClienteReg() {
-        return clienteReg;
-    }
-
-    public void setClienteReg(String clienteReg) {
-        this.clienteReg = clienteReg;
-    }
-
-    public Status getClienteStatus() {
-        return clienteStatus;
-    }
-
-    public void setClienteStatus(Status clienteStatus) {
-        this.clienteStatus = clienteStatus;
-    }
 }
