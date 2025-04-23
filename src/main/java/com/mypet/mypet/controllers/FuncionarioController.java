@@ -11,7 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/funcionarios")
-@CrossOrigin(origins = {"http://192.168.15.2:4200", "http://192.168.15.200:4200", "http://localhost:4200"})
+@CrossOrigin(origins = {
+        "http://192.168.15.2:4200",
+        "http://192.168.15.200:4200",
+        "http://localhost:4200"
+})
 public class FuncionarioController {
 
     @Autowired
@@ -26,6 +30,13 @@ public class FuncionarioController {
     @GetMapping("/{id}")
     public ResponseEntity<FuncionarioDTO> buscarPorId(@PathVariable Long id, @RequestHeader("Authorization") String authorizationHeader) {
         return funcionarioService.buscarPorId(id, authorizationHeader)
+                .map(ResponseEntity::ok)
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/pessoa/{pessoaId}")
+    public ResponseEntity<FuncionarioDTO> buscarPorPessoaId(@PathVariable Long pessoaId, @RequestHeader("Authorization") String authorizationHeader) {
+        return funcionarioService.buscarPorPessoaId(pessoaId, authorizationHeader)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

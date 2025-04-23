@@ -1,7 +1,6 @@
 package com.mypet.mypet.userCase;
 
 import com.mypet.mypet.domain.dto.FuncionarioDTO;
-import com.mypet.mypet.domain.enums.Status;
 import com.mypet.mypet.domain.model.FuncionariosEntity;
 import com.mypet.mypet.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,29 +17,29 @@ public class FuncionarioServiceImpl {
     private FuncionarioRepository funcionarioRepository;
 
     @Autowired
-    private com.mypet.mypet.userCase.AuthService authService; // Injeção do AuthService
+    private AuthService authService;
 
     @Transactional
     public FuncionarioDTO salvar(FuncionarioDTO funcionarioDTO, String authorizationHeader) {
-        // Validar o token de autorização
-        String token = authService.getToken(authorizationHeader); // Aqui estamos usando o AuthService para validar o token
-
-        // Agora que o token foi validado, podemos proceder com a lógica de salvar o funcionário
+        String token = authService.getToken(authorizationHeader);
         FuncionariosEntity funcionario = convertToEntity(funcionarioDTO);
         FuncionariosEntity funcionarioSalvo = funcionarioRepository.save(funcionario);
         return convertToDto(funcionarioSalvo);
     }
 
     public List<FuncionarioDTO> listarTodos(String authorizationHeader) {
-        // Use o token de autorização conforme necessário
         return funcionarioRepository.findAll().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
     public Optional<FuncionarioDTO> buscarPorId(Long id, String authorizationHeader) {
-        // Use o token de autorização conforme necessário
         return funcionarioRepository.findById(id)
+                .map(this::convertToDto);
+    }
+
+    public Optional<FuncionarioDTO> buscarPorPessoaId(Long pessoaId, String authorizationHeader) {
+        return funcionarioRepository.findByPessoaId(pessoaId)
                 .map(this::convertToDto);
     }
 
@@ -55,7 +54,6 @@ public class FuncionarioServiceImpl {
                     funcionariosEntity.setDataDeAdmissao(funcionarioDTO.getDataDeAdmissao());
                     funcionariosEntity.setDataDeDemissao(funcionarioDTO.getDataDeDemissao());
                     FuncionariosEntity funcionarioAtualizado = funcionarioRepository.save(funcionariosEntity);
-                    // Use o token de autorização conforme necessário
                     return convertToDto(funcionarioAtualizado);
                 })
                 .orElse(null);
@@ -63,7 +61,6 @@ public class FuncionarioServiceImpl {
 
     @Transactional
     public void deletar(Long id, String authorizationHeader) {
-        // Use o token de autorização conforme necessário
         funcionarioRepository.deleteById(id);
     }
 
