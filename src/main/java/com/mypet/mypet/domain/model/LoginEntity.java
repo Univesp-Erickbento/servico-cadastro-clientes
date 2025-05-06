@@ -21,13 +21,15 @@ public class LoginEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // AUTO para gerar o UUID automaticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @JoinColumn(name = "pessoa_id", nullable = false)
+    @Column(name = "pessoa_id", nullable = false)
     private long pessoaId;
 
+    @Column(name = "nomeusario") // <- nome errado no banco, mas refletido corretamente aqui
     private String nomeUsuario;
+
 
     private String senha;
 
