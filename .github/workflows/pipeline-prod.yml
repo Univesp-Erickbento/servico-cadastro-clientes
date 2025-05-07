@@ -70,8 +70,14 @@ jobs:
             echo "⬇️ Baixando nova imagem..."
             sudo docker pull torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
 
-            echo "🌐 Criando rede Docker personalizada (se não existir)..."
-            sudo docker network create --driver bridge --subnet 172.18.0.0/16 tbmt-rede-docker || true
+            echo "🌐 Garantindo que a rede Docker personalizada exista com o subnet correto..."
+            if ! sudo docker network inspect tbmt-rede-docker | grep '"Subnet": "172.18.0.0/16"' > /dev/null 2>&1; then
+              echo "Rede existente incorreta. Removendo e recriando..."
+              sudo docker network rm tbmt-rede-docker || true
+              sudo docker network create --driver bridge --subnet 172.18.0.0/16 tbmt-rede-docker
+            else
+              echo "Rede já existe com subnet correta."
+            fi
 
             echo "🏃 Subindo novo container com IP fixo..."
             sudo docker run -d --name cadastro-pessoas \
