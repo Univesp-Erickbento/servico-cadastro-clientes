@@ -40,14 +40,12 @@ jobs:
         run: docker push torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
 
       - name: 🚀 Deploy no servidor via SSH
-        if: ${{ env.REMOTE_HOST != '' }}
-        env:
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        if: ${{ secrets.REMOTE_HOST != '' }}
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}  # Usando a senha no lugar da chave
           script: |
             echo "⛔ Parando container antigo (se existir)..."
             docker stop cadastro-pessoas || true
@@ -61,9 +59,11 @@ jobs:
             echo "⬇️ Baixando nova imagem..."
             docker pull torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
 
+            # Criando a rede personalizada (caso não exista)
             echo "🌐 Criando rede Docker personalizada (se não existir)..."
             docker network create --driver bridge --subnet 172.18.0.0/16 tbmt-rede-docker || true
 
+            # Subindo novo container com IP fixo
             echo "🏃 Subindo novo container com IP fixo..."
             docker run -d --name cadastro-pessoas \
               --label project=cadastro-pessoas \
