@@ -39,8 +39,18 @@ jobs:
       - name: 📤 Push para Docker Hub
         run: docker push torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
 
+      - name: 🚀 Verificar segredo REMOTE_HOST
+        id: check_remote_host
+        run: |
+          if [ -z "${{ secrets.REMOTE_HOST }}" ]; then
+            echo "ERROR: REMOTE_HOST not set!"
+            exit 1
+          else
+            echo "REMOTE_HOST is set to ${REMOTE_HOST}"
+          fi
+
       - name: 🚀 Deploy no servidor via SSH
-        if: ${{ secrets.REMOTE_HOST }}  # Verificação direta se o segredo REMOTE_HOST está configurado
+        if: success() # A execução só acontece se a verificação do segredo for bem-sucedida
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.REMOTE_HOST }}
