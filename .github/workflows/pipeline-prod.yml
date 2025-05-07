@@ -40,7 +40,7 @@ jobs:
         run: docker push torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
 
       - name: 🚀 Deploy no servidor via SSH
-        if: ${{ secrets.REMOTE_HOST != '' }}
+        if: ${{ secrets.REMOTE_HOST }}  # Verificação direta se o segredo REMOTE_HOST está configurado
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.REMOTE_HOST }}
