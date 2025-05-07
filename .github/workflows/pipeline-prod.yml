@@ -71,12 +71,13 @@ jobs:
             sudo docker pull torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
 
             echo "🌐 Garantindo que a rede Docker personalizada exista com o subnet correto..."
-            if ! sudo docker network inspect tbmt-rede-docker | grep '"Subnet": "172.18.0.0/16"' > /dev/null 2>&1; then
-              echo "Rede existente incorreta. Removendo e recriando..."
+            # Verificando se a rede tbmt-rede-docker tem o subnet correto
+            if sudo docker network inspect tbmt-rede-docker | grep -q '"Subnet": "172.18.0.0/16"'; then
+              echo "Rede tbmt-rede-docker existe com o subnet correto."
+            else
+              echo "Rede tbmt-rede-docker não tem o subnet correto. Removendo e recriando..."
               sudo docker network rm tbmt-rede-docker || true
               sudo docker network create --driver bridge --subnet 172.18.0.0/16 tbmt-rede-docker
-            else
-              echo "Rede já existe com subnet correta."
             fi
 
             echo "🏃 Subindo novo container com IP fixo..."
