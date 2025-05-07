@@ -1,0 +1,7 @@
+mvn clean install
+./deploy.sh
+kind create cluster --config kind-cadastro-de-pessoas.yaml
+kind load docker-image bmt-cadastro-de-pessoas:0.0.7-SNAPSHOT --name bmt-cadastro-de-pessoas
+kubectl apply -f deployment-cadastro-de-pessoas.yaml
+kubectl rollout restart deployment bmt-cadastro-de-pessoas
+kubectl config get-contexts

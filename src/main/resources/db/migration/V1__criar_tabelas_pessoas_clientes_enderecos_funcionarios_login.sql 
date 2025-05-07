@@ -1,0 +1,63 @@
+-- Tabela para tb_pessoas
+CREATE TABLE tb_pessoas (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255),
+    sobrenome VARCHAR(255),
+    cpf VARCHAR(15),
+    rg VARCHAR(15),
+    genero VARCHAR(50),
+    Perfis VARCHAR(255),
+    email VARCHAR(255),
+    contato VARCHAR(50),
+    dataNascimento DATE,
+    dataCadastro DATE DEFAULT CURRENT_DATE
+);
+
+-- Tabela para tb_clientes
+CREATE TABLE tb_clientes (
+    id SERIAL PRIMARY KEY,
+    pessoa_id BIGINT NOT NULL,
+    clienteReg VARCHAR(50),
+    clienteStatus VARCHAR(50), -- Status (Enum)
+    FOREIGN KEY (pessoa_id) REFERENCES tb_pessoas(id)
+);
+
+-- Tabela para tb_enderecos
+CREATE TABLE tb_enderecos (
+    id SERIAL PRIMARY KEY,
+    clienteId BIGINT NOT NULL,
+    funcionarioId BIGINT,
+    rua VARCHAR(255),
+    numero VARCHAR(50),
+    complemento VARCHAR(255),
+    bairro VARCHAR(100),
+    cidade VARCHAR(100),
+    estado VARCHAR(100),
+    cep VARCHAR(20),
+    pais VARCHAR(100),
+    tipoEndereco VARCHAR(50), -- TipoEndereco (Enum)
+    FOREIGN KEY (clienteId) REFERENCES tb_clientes(id),
+    FOREIGN KEY (funcionarioId) REFERENCES tb_funcionarios(id)
+);
+
+-- Tabela para tb_funcionarios
+CREATE TABLE tb_funcionarios (
+    id SERIAL PRIMARY KEY,
+    pessoa_id BIGINT NOT NULL,
+    funcionarioTipo VARCHAR(50),
+    funcionarioReg VARCHAR(50),
+    funcionarioStatus VARCHAR(50), -- Status (Enum)
+    data_de_admissao DATE,
+    data_de_demissao DATE,
+    FOREIGN KEY (pessoa_id) REFERENCES tb_pessoas(id)
+);
+
+-- Tabela para tb_login
+CREATE TABLE tb_login (
+    id SERIAL PRIMARY KEY,
+    pessoa_id BIGINT NOT NULL,
+    nomeUsario VARCHAR(255),
+    senha VARCHAR(255),
+    perfis VARCHAR(255),
+    FOREIGN KEY (pessoa_id) REFERENCES tb_pessoas(id)
+);

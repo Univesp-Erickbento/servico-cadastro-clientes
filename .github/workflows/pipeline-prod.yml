@@ -1,0 +1,74 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout do código
+        uses: actions/checkout@v3
+
+      - name: ☕ Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 🧪 Build com Maven
+        run: mvn clean install -DskipTests
+
+      - name: 📦 Obter versão do projeto (pom.xml)
+        id: project_version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 🐳 Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: 🏗️ Build da imagem Docker
+        run: docker build -t torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }} .
+
+      - name: 📤 Push para Docker Hub
+        run: docker push torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
+
+      - name: 🚀 Deploy no servidor via SSH
+        if: ${{ secrets.REMOTE_HOST != '' }}
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "⛔ Parando container antigo (se existir)..."
+            docker stop cadastro-pessoas || true
+
+            echo "🗑️ Removendo container antigo (se existir)..."
+            docker rm cadastro-pessoas || true
+
+            echo "🧹 Removendo imagem antiga (se existir)..."
+            docker image prune -a -f --filter "label=project=cadastro-pessoas" || true
+
+            echo "⬇️ Baixando nova imagem..."
+            docker pull torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
+
+            # Criando a rede personalizada (caso não exista)
+            echo "🌐 Criando rede Docker personalizada (se não existir)..."
+            docker network create --driver bridge --subnet 172.18.0.0/16 tbmt-rede-docker || true
+
+            # Subindo novo container com IP fixo
+            echo "🏃 Subindo novo container com IP fixo..."
+            docker run -d --name cadastro-pessoas \
+              --label project=cadastro-pessoas \
+              --network tbmt-rede-docker \
+              --ip 172.18.0.90 \
+              -p 9090:9090 \
+              torresbento/tbmt-cadastro-de-pessoas:${{ steps.project_version.outputs.version }}
+
