@@ -27,20 +27,16 @@ public class LoginEntity implements Serializable {
     @Column(name = "pessoa_id", nullable = false)
     private long pessoaId;
 
-    @Column(name = "nomeusario") // <- nome errado no banco, mas refletido corretamente aqui
+    @Column(name = "nomeusuario") // <-- agora corresponde corretamente à coluna no banco
     private String nomeUsuario;
-
 
     private String senha;
 
     private String perfis;
 
-
-
     public String getNomeUsuario() {
         return nomeUsuario;
     }
-
 
     public void setNomeUsuario(String nomeUsuario) {
         this.nomeUsuario = nomeUsuario;

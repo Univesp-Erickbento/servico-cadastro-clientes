@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pessoas")
-@CrossOrigin(origins = {"http://192.168.15.2:4200", "http://192.168.15.200:4200", "http://localhost:4200"})
+@CrossOrigin(origins = {"http://45.93.100.30:4200", "http://192.168.15.2:4200", "http://192.168.15.200:4200", "http://localhost:4200"})
 public class PessoaController {
 
     @Autowired
