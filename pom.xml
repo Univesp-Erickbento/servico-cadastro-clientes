@@ -12,7 +12,7 @@
 
 	<groupId>com.mypet</groupId>
 	<artifactId>mypet</artifactId>
-	<version>0.0.12-SNAPSHOT</version>
+	<version>0.0.13-SNAPSHOT</version>
 	<name>mypet</name>
 	<description>mypet project for Spring Boot</description>
 

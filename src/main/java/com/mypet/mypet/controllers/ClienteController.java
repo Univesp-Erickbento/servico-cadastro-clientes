@@ -1,5 +1,8 @@
 package com.mypet.mypet.controllers;
 
+import com.mypet.mypet.domain.dto.clientedto.ClienteEnvioDTO;
+import com.mypet.mypet.domain.enums.Status;
+
 import com.mypet.mypet.domain.model.ClientesEntity;
 import com.mypet.mypet.userCase.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +34,18 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientesEntity> salvar(@RequestBody ClientesEntity cliente, @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<ClientesEntity> salvar(@RequestBody ClienteEnvioDTO dto,
+                                                 @RequestHeader("Authorization") String authorizationHeader) {
+
+        ClientesEntity cliente = new ClientesEntity();
+        cliente.setPessoaId(dto.pessoaId());
+        cliente.setClienteReg(dto.clienteReg());
+        cliente.setClienteStatus(Status.valueOf(dto.clienteStatus().toUpperCase()));  // Assumindo que está vindo como "ATIVO"
+
         ClientesEntity clienteSalvo = clienteService.salvar(cliente, authorizationHeader);
         return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<ClientesEntity> atualizar(@PathVariable Long id, @RequestBody ClientesEntity clientesEntity, @RequestHeader("Authorization") String authorizationHeader) {

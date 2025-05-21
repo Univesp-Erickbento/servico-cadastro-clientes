@@ -1,4 +1,4 @@
-package com.mypet.mypet.domain.dto;
+package com.mypet.mypet.domain.dto.clientedto;
 
 import com.mypet.mypet.domain.model.PessoasEntity;
 import com.mypet.mypet.domain.enums.Status;
