@@ -37,6 +37,8 @@ public class ClienteController {
     public ResponseEntity<ClientesEntity> salvar(@RequestBody ClienteEnvioDTO dto,
                                                  @RequestHeader("Authorization") String authorizationHeader) {
 
+        System.out.println("📥 DTO recebido: " + dto);
+        System.out.println("📥 Status recebido: " + dto.clienteStatus());
         ClientesEntity cliente = new ClientesEntity();
         cliente.setPessoaId(dto.pessoaId());
         cliente.setClienteReg(dto.clienteReg());
@@ -61,8 +63,9 @@ public class ClienteController {
 
     // 🔹 Novo endpoint para buscar cliente por pessoaId
     @GetMapping("/pessoa/{pessoaId}")
-    public ResponseEntity<ClientesEntity> buscarPorPessoaId(@PathVariable Long pessoaId,
-                                                            @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<ClientesEntity> buscarPorPessoaId(@PathVariable("pessoaId") Long pessoaId,
+                                                            @RequestHeader("Authorization") String authorizationHeader)
+    {
         return clienteService.buscarPorPessoaId(pessoaId, authorizationHeader)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
