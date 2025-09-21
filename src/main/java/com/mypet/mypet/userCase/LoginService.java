@@ -2,7 +2,7 @@ package com.mypet.mypet.userCase;
 
 import com.mypet.mypet.domain.dto.login.LoginRequest;
 import com.mypet.mypet.domain.dto.login.LoginResponse;
-import com.mypet.mypet.domain.model.LoginEntity;
+import com.mypet.mypet.application.core.domain.model.LoginEntity;
 import com.mypet.mypet.repositories.LoginRepository;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

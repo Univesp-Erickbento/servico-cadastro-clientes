@@ -1,4 +1,4 @@
-package com.mypet.mypet.domain.model;
+package com.mypet.mypet.application.core.domain.model;
 
 //import com.mypet.mypet.domain.model.Endereco;
 import com.fasterxml.jackson.annotation.JsonFormat;

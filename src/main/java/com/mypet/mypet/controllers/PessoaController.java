@@ -1,6 +1,6 @@
 package com.mypet.mypet.controllers;
 
-import com.mypet.mypet.domain.model.PessoasEntity;
+import com.mypet.mypet.application.core.domain.model.PessoasEntity;
 import com.mypet.mypet.userCase.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

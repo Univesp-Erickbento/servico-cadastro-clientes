@@ -3,7 +3,7 @@ package com.mypet.mypet.controllers;
 import com.mypet.mypet.domain.dto.clientedto.ClienteEnvioDTO;
 import com.mypet.mypet.domain.enums.Status;
 
-import com.mypet.mypet.domain.model.ClientesEntity;
+import com.mypet.mypet.application.core.domain.model.ClientesEntity;
 import com.mypet.mypet.userCase.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

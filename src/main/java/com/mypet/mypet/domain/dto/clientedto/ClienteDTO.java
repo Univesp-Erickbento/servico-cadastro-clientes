@@ -1,6 +1,6 @@
 package com.mypet.mypet.domain.dto.clientedto;
 
-import com.mypet.mypet.domain.model.PessoasEntity;
+import com.mypet.mypet.application.core.domain.model.PessoasEntity;
 import com.mypet.mypet.domain.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.mypet.mypet.repositories;
 
-import com.mypet.mypet.domain.model.PessoasEntity;
+import com.mypet.mypet.application.core.domain.model.PessoasEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

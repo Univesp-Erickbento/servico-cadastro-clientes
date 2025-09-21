@@ -1,6 +1,6 @@
 package com.mypet.mypet.repositories;
 
-import com.mypet.mypet.domain.model.ClientesEntity;
+import com.mypet.mypet.application.core.domain.model.ClientesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

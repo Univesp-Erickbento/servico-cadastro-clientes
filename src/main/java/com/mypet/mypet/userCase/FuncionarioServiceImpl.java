@@ -1,7 +1,7 @@
 package com.mypet.mypet.userCase;
 
 import com.mypet.mypet.domain.dto.FuncionarioDTO;
-import com.mypet.mypet.domain.model.FuncionariosEntity;
+import com.mypet.mypet.application.core.domain.model.FuncionariosEntity;
 import com.mypet.mypet.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
