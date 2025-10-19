@@ -1,4 +1,4 @@
-package com.mypet.mypet.controllers;
+package com.mypet.mypet.adapters.in.controllers;
 
 import com.mypet.mypet.domain.dto.FuncionarioDTO;
 import com.mypet.mypet.userCase.FuncionarioServiceImpl;

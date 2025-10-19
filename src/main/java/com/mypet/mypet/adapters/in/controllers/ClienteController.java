@@ -1,4 +1,4 @@
-package com.mypet.mypet.controllers;
+package com.mypet.mypet.adapters.in.controllers;
 
 import com.mypet.mypet.domain.dto.clientedto.ClienteEnvioDTO;
 import com.mypet.mypet.domain.enums.Status;

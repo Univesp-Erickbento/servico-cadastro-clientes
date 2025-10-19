@@ -1,4 +1,4 @@
-package com.mypet.mypet.repositories;
+package com.mypet.mypet.adapters.out.repositories;
 
 import com.mypet.mypet.application.core.domain.model.PessoasEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

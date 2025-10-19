@@ -1,7 +1,7 @@
 package com.mypet.mypet.userCase;
 
 import com.mypet.mypet.application.core.domain.model.PessoasEntity;
-import com.mypet.mypet.repositories.PessoaRepository;
+import com.mypet.mypet.adapters.out.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

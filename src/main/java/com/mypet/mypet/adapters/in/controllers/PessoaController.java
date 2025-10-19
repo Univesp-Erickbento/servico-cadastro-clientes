@@ -1,4 +1,4 @@
-package com.mypet.mypet.controllers;
+package com.mypet.mypet.adapters.in.controllers;
 
 import com.mypet.mypet.application.core.domain.model.PessoasEntity;
 import com.mypet.mypet.userCase.PessoaServiceImpl;
