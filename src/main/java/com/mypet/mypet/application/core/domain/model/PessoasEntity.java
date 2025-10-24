@@ -49,11 +49,7 @@ public class PessoasEntity implements Serializable {
         }
 
 
-        public List<LoginEntity> perfis (LoginEntity perfil){
-                List<LoginEntity> perfiList = new ArrayList<>();
-                perfiList.add(perfil);
-                return perfiList;
-        }
+
 
         public void setPessoa_id(long id) {
         }

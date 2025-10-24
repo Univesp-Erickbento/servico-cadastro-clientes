@@ -35,7 +35,6 @@ public class ClienteServiceImpl {
             ClientesEntity cliente = clienteExistente.get();
             cliente.setPessoaId(clienteAtualizado.getPessoaId());
             cliente.setClienteReg(clienteAtualizado.getClienteReg());
-            cliente.setClienteStatus(clienteAtualizado.getClienteStatus());
             return clienteRepository.save(cliente);
         }
         return null;

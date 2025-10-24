@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan(basePackages = "com.mypet.mypet.domain.model")
 @SpringBootApplication
-public class MypetApplication {
+public class CadastroClienteApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MypetApplication.class, args);
+		SpringApplication.run(CadastroClienteApplication.class, args);
 
 	}
 }

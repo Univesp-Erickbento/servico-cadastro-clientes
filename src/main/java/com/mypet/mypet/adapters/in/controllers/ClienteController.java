@@ -1,7 +1,6 @@
 package com.mypet.mypet.adapters.in.controllers;
 
 import com.mypet.mypet.domain.dto.clientedto.ClienteEnvioDTO;
-import com.mypet.mypet.domain.enums.Status;
 
 import com.mypet.mypet.application.core.domain.model.ClientesEntity;
 import com.mypet.mypet.userCase.ClienteServiceImpl;
@@ -42,7 +41,6 @@ public class ClienteController {
         ClientesEntity cliente = new ClientesEntity();
         cliente.setPessoaId(dto.pessoaId());
         cliente.setClienteReg(dto.clienteReg());
-        cliente.setClienteStatus(Status.valueOf(dto.clienteStatus().toUpperCase()));  // Assumindo que está vindo como "ATIVO"
 
         ClientesEntity clienteSalvo = clienteService.salvar(cliente, authorizationHeader);
         return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);

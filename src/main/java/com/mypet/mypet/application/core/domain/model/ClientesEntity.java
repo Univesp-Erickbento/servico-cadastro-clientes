@@ -1,6 +1,5 @@
 package com.mypet.mypet.application.core.domain.model;
 
-import com.mypet.mypet.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,13 +21,12 @@ public class ClientesEntity implements Serializable {
     @EqualsAndHashCode.Include
     private Long id;
 
+
     @Column(name = "pessoa_id", nullable = false)
     private Long pessoaId;
 
     @Column(name = "cliente_reg")
     private String clienteReg;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "cliente_status")
-    private Status clienteStatus;
+
 }
