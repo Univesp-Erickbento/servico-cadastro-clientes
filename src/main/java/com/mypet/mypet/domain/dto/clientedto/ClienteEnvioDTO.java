@@ -1,8 +1,18 @@
 package com.mypet.mypet.domain.dto.clientedto;
 
+import java.time.LocalDate;
 
 public record ClienteEnvioDTO(
-        long pessoaId,
+        String nome,
+        String sobrenome,
+        String cpf,
+        String rg,
+        String genero,
+        String perfis,
+        String email,
+        String contato,
+        LocalDate dataNascimento,
+        Long pessoaId,
         String clienteReg,
-        String clienteStatus
+        Boolean ativo
 ) {}

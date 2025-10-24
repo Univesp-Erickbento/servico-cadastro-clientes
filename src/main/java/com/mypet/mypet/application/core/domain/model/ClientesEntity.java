@@ -35,11 +35,8 @@ public class ClientesEntity implements Serializable {
 
     private String rg;
     private String genero;
-
-   private String perfis;
-
+    private String perfis;
     private String email;
-
     private String contato;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
