@@ -25,30 +25,13 @@ public class ClientesEntity implements Serializable {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @NotBlank
-    private String nome;
-
-    private String sobrenome;
-
-    @Pattern(regexp = "\\d{11}")
-    private String cpf;
-
-    private String rg;
-    private String genero;
-    private String perfis;
-    private String email;
-    private String contato;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dataNascimento;
-
-    private LocalDate dataCadastro = LocalDate.now();
-
     @Column(name = "pessoa_id", nullable = false)
     private Long pessoaId;
 
+    @Column(name = "cliente_reg")
     private String clienteReg;
 
-    @Column(nullable = false)
-    private Boolean ativo = true;
+
+    private String clienteStatus;
+
 }

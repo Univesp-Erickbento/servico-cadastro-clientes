@@ -14,5 +14,6 @@ public record ClienteEnvioDTO(
         LocalDate dataNascimento,
         Long pessoaId,
         String clienteReg,
-        Boolean ativo
+        //Boolean ativo
+        String clienteStatus
 ) {}

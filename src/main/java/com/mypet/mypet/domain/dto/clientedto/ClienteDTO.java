@@ -1,6 +1,5 @@
 package com.mypet.mypet.domain.dto.clientedto;
 
-import com.mypet.mypet.application.core.domain.model.PessoasEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
