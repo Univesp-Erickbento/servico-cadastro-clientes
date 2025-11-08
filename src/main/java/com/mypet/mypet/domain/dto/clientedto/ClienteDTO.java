@@ -13,7 +13,7 @@ public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private long id;
-    private PessoasEntity pessoa;
+    private Long pessoaId;
     private String clienteReg;
 
 //    public void setPessoa(long id) {
