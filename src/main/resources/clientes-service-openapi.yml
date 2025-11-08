@@ -1,0 +1,262 @@
+openapi: 3.0.1
+info:
+  title: Clientes Service API
+  description: API responsável pelo cadastro e gerenciamento de clientes do sistema MyPet.
+  version: 1.0.0
+  contact:
+    name: Bento Dev Team
+    email: suporte@bento.com
+
+servers:
+  - url: http://localhost:9002/api
+    description: Servidor local de clientes
+
+tags:
+  - name: Clientes
+    description: Operações relacionadas ao cadastro e manutenção de clientes
+
+paths:
+  /clientes:
+    get:
+      summary: Listar todos os clientes
+      description: Retorna uma lista com todos os clientes cadastrados.
+      operationId: listarClientes
+      tags:
+        - Clientes
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer eyJhbGciOi...
+      responses:
+        '200':
+          description: Lista de clientes retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientesEntity'
+        '401':
+          description: Token de autenticação inválido.
+
+    post:
+      summary: Criar um novo cliente
+      description: Cadastra um novo cliente no sistema.
+      operationId: criarCliente
+      tags:
+        - Clientes
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer eyJhbGciOi...
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteEnvioDTO'
+      responses:
+        '201':
+          description: Cliente criado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientesEntity'
+        '400':
+          description: Dados inválidos no corpo da requisição.
+        '401':
+          description: Token de autenticação inválido.
+
+  /clientes/{id}:
+    get:
+      summary: Buscar cliente por ID
+      description: Retorna os dados de um cliente específico pelo seu ID.
+      operationId: buscarClientePorId
+      tags:
+        - Clientes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer eyJhbGciOi...
+      responses:
+        '200':
+          description: Cliente encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientesEntity'
+        '404':
+          description: Cliente não encontrado.
+
+    put:
+      summary: Atualizar cliente
+      description: Atualiza os dados de um cliente existente.
+      operationId: atualizarCliente
+      tags:
+        - Clientes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer eyJhbGciOi...
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientesEntity'
+      responses:
+        '200':
+          description: Cliente atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientesEntity'
+        '404':
+          description: Cliente não encontrado.
+
+    delete:
+      summary: Deletar cliente
+      description: Remove um cliente do sistema.
+      operationId: deletarCliente
+      tags:
+        - Clientes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer eyJhbGciOi...
+      responses:
+        '204':
+          description: Cliente deletado com sucesso.
+        '404':
+          description: Cliente não encontrado.
+
+  /clientes/pessoa/{pessoaId}:
+    get:
+      summary: Buscar cliente por ID da Pessoa
+      description: Retorna um cliente vinculado a um determinado `pessoaId`.
+      operationId: buscarPorPessoaId
+      tags:
+        - Clientes
+      parameters:
+        - name: pessoaId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer eyJhbGciOi...
+      responses:
+        '200':
+          description: Cliente encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientesEntity'
+        '404':
+          description: Cliente não encontrado.
+
+components:
+  schemas:
+    ClienteEnvioDTO:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: João
+        sobrenome:
+          type: string
+          example: Silva
+        cpf:
+          type: string
+          example: "12345678900"
+        rg:
+          type: string
+          example: "MG1234567"
+        genero:
+          type: string
+          example: "Masculino"
+        perfis:
+          type: string
+          example: "CLIENTE"
+        email:
+          type: string
+          example: "joao.silva@email.com"
+        contato:
+          type: string
+          example: "(31) 99999-9999"
+        dataNascimento:
+          type: string
+          format: date
+          example: "1990-01-15"
+        pessoaId:
+          type: integer
+          example: 5
+        clienteReg:
+          type: string
+          example: "REG-001"
+        clienteStatus:
+          type: string
+          example: "ATIVO"
+
+    ClientesEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        pessoaId:
+          type: integer
+          example: 5
+        clienteReg:
+          type: string
+          example: "REG-001"
+        clienteStatus:
+          type: string
+          example: "ATIVO"
+
+    ClienteDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        pessoaId:
+          type: integer
+          example: 5
+        clienteReg:
+          type: string
+          example: "REG-001"
